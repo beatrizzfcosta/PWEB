@@ -71,7 +71,7 @@ input[type="password"]::placeholder {
 }
 
 input[type="submit"] {
-    width: 100%;
+    width: calc(100% + 30px); 
     border: none;
     background-color: #5490FF;
     color: #fff;
