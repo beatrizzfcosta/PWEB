@@ -23,7 +23,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
     width: 50%;
 }
 
@@ -71,6 +70,7 @@ input[type="password"]::placeholder {
 
 input[type="submit"] {
     width: calc(100% + 30px); 
+    padding: 15px;
     border: none;
     background-color:#06347a;
     color: #fff;
