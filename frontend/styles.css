@@ -105,20 +105,9 @@ h3{
     font-size: 16px;
 }
 
-.input-button-container button {
-    padding: 10px 15px;
-    border-radius: 30px;
-    border: none;
-    background-color: #06347a;
-    color: #fff;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
 button {
-    width: 100px; /* Defina a largura igual ao input de pesquisa */
-    height: 40px; /* Ajuste conforme necessário */
+    width: 100px; 
+    height: 50px; /* Ajuste conforme necessário */
     padding: 5px;
     border-radius: 30px;
     border: none;
