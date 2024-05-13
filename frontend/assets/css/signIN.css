@@ -6,7 +6,6 @@ body {
 
 .container {
     display: flex;
-    height: 100vh;
     background-color: #000;
 }
 
@@ -15,7 +14,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%; /* Definindo a largura para 50% */
+    width: 50%;
 }
 
 .right-side {
@@ -25,15 +24,15 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 50%; /* Definindo a largura para 50% */
+    width: 50%;
 }
 
 h1 {
-    position: absolute; /* Para posicionar no canto superior direito */
+    position: absolute;
     top: 30px;
-    left: 10%; /* Adicionando margem do topo e da direita */
+    left: 10%;
     color: #fff;
-    font-size: 14px; /* Aumentando o tamanho da fonte */
+    font-size: 14px; 
     font-weight: normal;
 }
 
@@ -73,7 +72,7 @@ input[type="password"]::placeholder {
 input[type="submit"] {
     width: calc(100% + 30px); 
     border: none;
-    background-color: #5490FF;
+    background-color:#06347a;
     color: #fff;
     cursor: pointer;
     font-size: 16px;
@@ -82,5 +81,28 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color:#5490FF ;
+}
+
+.fa-eye{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.fa-eye-slash{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+  
+#msgError{
+    text-align: center;
+    color: #ff0000;
+    border-radius: 4px;
+    display: none;
 }

@@ -2,35 +2,38 @@
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="../css/signIN.css" />
-    <title>SignUp</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../css/signIN.css" />
+  <title>SignUp</title>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Not registered? <a href="signUP.html" style="color: #5490FF; text-decoration: none;">Sign up</a> now</h1>
-        <div class="left-side">
-            <div class="signup-form">
-                <div class="form-group">
-                    <h2>Sign In</h2>
-                    <h3>Explore drone assembly</h3>
-                </div>
-                <form>
-                        <input type="text" id="email" placeholder="Enter your email" required />
-                        <input type="password" id="password" placeholder="Enter your password" required />
-                        <input type="submit" value="Sign in">
-                </form>
-            </div>
+  <div class="container">
+    <h1>Not registered? <a href="signUP.html" style="color: #5490FF; text-decoration: none;">Sign up</a> now</h1>
+    <div class="left-side">
+      <div class="signup-form">
+        <div class="form-group">
+          <h2>Sign In</h2>
+          <h3>Explore drone assembly</h3>
         </div>
-        <div class="right-side">
-          <img class="image-container" src="../img/signIN.jpg" alt="signUP photo" style="width: 110%;">
+        <form>
+          <input type="text" id="email-username" placeholder="Enter your email or username" required />
+          <div style="position: relative;">
+            <input type="password" id="password" placeholder="Create a password" required />
+            <i id="verSenha" class="fa fa-eye" aria-hidden="true"
+              onclick="togglePasswordVisibility('password',this)"></i>
+          </div>
+          <input type="submit" value="Sign in">
+        </form>
       </div>
     </div>
-    <script src="../js/signUP.js"></script>
+    <div class="right-side">
+      <img class="image-container" src="../img/signIN.jpg" alt="signUP photo" style="width: 110%;">
+    </div>
+  </div>
+  <script src="../js/signUP.js"></script>
 </body>
-
 </html>

@@ -6,7 +6,6 @@ body {
 
 .container {
     display: flex;
-    height: 100vh;
     background-color: #000;
 }
 
@@ -36,7 +35,6 @@ h1 {
     font-size: 14px; /* Aumentando o tamanho da fonte */
     font-weight: normal;
 }
-
 .signup-form {
     width: 55%; 
 }
@@ -53,11 +51,17 @@ h3 {
     font-weight: normal;
 }
 
+#name-container {
+    display: flex;
+    width: calc(100% + 45px);
+}
+
 input[type="text"],
-input[type="password"], input[type="submit"]  {
+input[type="password"]  {
     width: 100%; /* Fazendo todos os inputs terem o mesmo tamanho */
     padding: 15px; /* Aumentando o padding */
     margin-bottom:15px;
+    margin-right: 15px;
     border-radius: 30px;
     border: none;
     background-color: #333;
@@ -70,16 +74,49 @@ input[type="password"]::placeholder {
     color: #fff;
 }
 
-input[type="submit"] {
-    width: calc(100% + 30px); 
+button {
+    width: calc(100% + 30px); /* Fazendo todos os inputs terem o mesmo tamanho */
+    padding: 15px; /* Aumentando o padding */
+    margin-bottom:15px;
+    border-radius: 30px;
     border: none;
-    background-color: #5490FF;
+    background-color: #06347a ;
     color: #fff;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
 }
 
-input[type="submit"]:hover {
-    background-color: #0056b3;
+button:hover {
+    background-color: #5490FF;
+}
+
+.fa-eye{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.fa-eye-slash{
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+  
+#msgError{
+    text-align: center;
+    color: #ff0000;
+    border-radius: 4px;
+    display: none;
+}
+  
+#msgSuccess{
+    text-align: center;
+    color: #06347a;
+    border-radius: 4px;
+    display: none;
 }
