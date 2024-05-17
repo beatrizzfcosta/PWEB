@@ -2,11 +2,13 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    
 }
 
 .container {
     display: flex;
     background-color: #000;
+    height: 100vh;
 }
 
 .left-side {
@@ -14,7 +16,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%; /* Definindo a largura para 50% */
+   
 }
 
 .right-side {
@@ -24,21 +26,20 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 50%; /* Definindo a largura para 50% */
 }
 
 h1 {
     position: absolute; /* Para posicionar no canto superior direito */
     top: 30px;
-    right: 10%; /* Adicionando margem do topo e da direita */
+    right: 10%; /* Adicionar margem do topo e da direita */
     color: #fff;
-    font-size: 14px; /* Aumentando o tamanho da fonte */
+    font-size: 14px;
     font-weight: normal;
 }
 .signup-form {
     width: 55%; 
+    max-width: 400px; 
 }
-
 h2 {
     color: #fff;
     font-size: 25px;
@@ -58,25 +59,20 @@ h3 {
 
 input[type="text"],
 input[type="password"]  {
-    width: 100%; /* Fazendo todos os inputs terem o mesmo tamanho */
-    padding: 15px; /* Aumentando o padding */
+    width: 100%; 
+    padding: 15px; 
     margin-bottom:15px;
     margin-right: 15px;
     border-radius: 30px;
     border: none;
     background-color: #333;
     color: #fff;
-    font-size: 16px; /* Aumentando o tamanho da fonte */
-}
-
-input[type="text"]::placeholder,
-input[type="password"]::placeholder {
-    color: #fff;
+    font-size: 16px;
 }
 
 button {
-    width: calc(100% + 30px); /* Fazendo todos os inputs terem o mesmo tamanho */
-    padding: 15px; /* Aumentando o padding */
+    width: calc(100% + 30px);  /* não sei porque não preenche tudo com 100% */
+    padding: 15px; 
     margin-bottom:15px;
     border-radius: 30px;
     border: none;

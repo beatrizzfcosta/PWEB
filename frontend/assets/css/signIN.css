@@ -5,25 +5,23 @@ body {
 }
 
 .container {
-    display: flex;
+    display: flex; /* Para conseguir dividir a página ao meio */
     background-color: #000;
+    height: 100vh;
 }
 
 .left-side {
-    flex: 1;
+    flex: 1; /* atribui ao item uma proporção flexível em relação aos outros itens dentro do mesmo contêiner. */
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
 }
 
 .right-side {
     flex: 1;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
 }
 
 h1 {
@@ -44,33 +42,30 @@ h2 {
     font-size: 25px;
     margin-bottom: 0px;
 }
+
 h3 {
     margin-top: 0px;
     color: #fff;
-    font-size: 14px; /* Aumentando o tamanho da fonte */
+    font-size: 14px;
     font-weight: normal;
 }
 
 input[type="text"],
-input[type="password"], input[type="submit"]  {
-    width: 100%; /* Fazendo todos os inputs terem o mesmo tamanho */
-    padding: 15px; /* Aumentando o padding */
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
     margin-bottom:15px;
     border-radius: 30px;
     border: none;
     background-color: #333;
     color: #fff;
-    font-size: 16px; /* Aumentando o tamanho da fonte */
+    font-size: 16px;
 }
 
-input[type="text"]::placeholder,
-input[type="password"]::placeholder {
-    color: #fff;
-}
-
-input[type="submit"] {
-    width: calc(100% + 30px); 
+button {
+    width: calc(100% + 30px); /* não sei porque não preenche tudo com 100% */
     padding: 15px;
+    border-radius: 30px;
     border: none;
     background-color:#06347a;
     color: #fff;
@@ -80,8 +75,8 @@ input[type="submit"] {
     box-sizing: border-box;
 }
 
-input[type="submit"]:hover {
-    background-color:#5490FF ;
+button:hover {
+    background-color:#5490FF;
 }
 
 .fa-eye{
@@ -99,7 +94,7 @@ input[type="submit"]:hover {
     cursor: pointer;
     color: #fff;
 }
-  
+
 #msgError{
     text-align: center;
     color: #ff0000;

@@ -1,8 +1,5 @@
-let usuario = document.getElementById('email-username');
-let validUsuario = false;
-
-let senha = document.getElementById('password');
-let validSenha = false;
+var msgError = document.getElementById('msgError')
+var msgSuccess = document.getElementById('msgSuccess')
 
 function togglePasswordVisibility(inputId, icon) {
     var input = document.getElementById(inputId);
@@ -15,4 +12,12 @@ function togglePasswordVisibility(inputId, icon) {
         icon.classList.remove('fa-eye-slash');
         icon.classList.add('fa-eye');
     }
+}
+
+function entrar(){
+    var username = document.getElementById("email-username").value;
+    var password = document.getElementById("password").value;
+    console.log("Usuário:", username);
+    console.log("Senha:", password); 
+    alert("Entrando");
 }

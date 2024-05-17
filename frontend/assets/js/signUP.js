@@ -1,20 +1,11 @@
-let btn = document.getElementById('verSenha')
-let btnConfirm = document.getElementById('verConfirmSenha')
-
-let firstName = document.getElementById('first-name');
-let lastName = document.getElementById('last-name');
 let validNome = false;
 
-let usuario = document.getElementById('username');
 let validUsuario = false;
 
-let email = document.getElementById('email');
 let validEmail = false;
 
-let senha = document.getElementById('password');
 let validSenha = false;
 
-let confirmSenha = document.getElementById('password-confirmation');
 let validConfirmSenha = false;
 
 let msgError = document.getElementById('msgError')
@@ -31,5 +22,22 @@ function togglePasswordVisibility(inputId, icon) {
         icon.classList.remove('fa-eye-slash');
         icon.classList.add('fa-eye');
     }
+}
+
+function registar() {
+    var firstName = document.getElementById('first-name').value;
+    var lastName = document.getElementById('last-name').value;
+    var usuario = document.getElementById('username').value;
+    var email = document.getElementById('email').value;
+    var senha = document.getElementById('password').value;
+    var confirmSenha = document.getElementById('password-confirmation').value;
+
+    console.log("First Name:", firstName);
+    console.log("Last Name:", lastName);
+    console.log("Email:", email);
+    console.log("Usuário:", usuario);
+    console.log("Senha:", senha);
+    console.log("Senha confirmada:", confirmSenha);
+    alert("Registando");
 }
 
