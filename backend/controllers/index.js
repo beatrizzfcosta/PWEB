@@ -5,7 +5,7 @@ const user = require("./user/user");
 //const testing = require("./testing/womp");
 
 module.exports = {
-  //login,
+  project,
   user,
   //testing,
 };
