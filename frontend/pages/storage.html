@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Lateral</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/storage.css" />
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <main>
+        <section class="search-bar">
+            <input type="text" id="searchInput" placeholder="Pesquisar componentes...">
+        </section>
+        <section class="categories">
+            <button class="category-btn" data-category="all">
+                <img src="../assets/img/quadcopter.png" alt="Todas as categorias"> All
+            </button>
+            <button class="category-btn" data-category="motores">
+                <img src="../assets/img/gear-3.png" alt="Todas as categorias"> Engine
+            </button>
+            <button class="category-btn" data-category="baterias">
+                <img src="../assets/img/battery.png" alt="Todas as categorias"> Batteries
+            </button>
+            <button class="category-btn" data-category="hélices">
+                <img src="../assets/img/technology.png" alt="Todas as categorias"> Helices</button>
+            <!-- Adicione mais categorias conforme necessário -->
+        </section>
+        <section class="component-list">
+            <div class="component-grid"></div>
+        </section>
+        <div id="componentModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalCategory"></p>
+                <p id="modalDate"></p>
+                <p id="modalQuantity"></p>
+            </div>
+        </div>
+    </main>
+
+</body>
+<script src="../assets/js/loadSidebar.js"></script>
+<script src="../assets/js/storage.js"></script>
+</html>
+
