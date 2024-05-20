@@ -95,9 +95,10 @@ button:hover {
     color: #fff;
 }
 
-#msgError{
+#msgError {
     text-align: center;
     color: #ff0000;
     border-radius: 4px;
-    display: none;
+    display: block; /* Ensure the message is displayed */
+    margin-top: 10px; /* Add some space between the message and other elements */
 }
