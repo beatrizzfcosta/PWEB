@@ -1,4 +1,4 @@
-// statistics.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const bestModelsCtx = document.getElementById('bestModelsChart').getContext('2d');
     const componentsCtx = document.getElementById('componentsChart').getContext('2d');

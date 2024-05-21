@@ -1,14 +1,11 @@
-/* statistics.css */
 body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
     background-image: url('../img/main.jpg');
-    background-size: cover;
     background-repeat: no-repeat;
     color: white;
 }
-
 main {
     margin-left: 80px;
     padding: 20px;

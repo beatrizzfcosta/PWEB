@@ -1,5 +1,3 @@
-// assets/scripts/loadSidebar.js
-
 function loadSidebar() {
     const sidebarHTML = `
         <div class="sidebar">
@@ -32,7 +30,7 @@ function loadSidebar() {
                     <img src="../assets/img/graph.png" alt="Stats" class="icon">
                     <span class="icon-text">Statistics</span>
                 </a>
-                <a href="#" class="icon-link logout-icon logout-link">
+                <a href="index.html" class="icon-link logout-icon logout-link">
                     <img src="../assets/img/power-2.png" alt="Log out" class="icon">
                     <span class="icon-text">Log out</span>
                 </a>

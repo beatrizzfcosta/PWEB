@@ -1,4 +1,3 @@
-// assembled.js
 document.addEventListener('DOMContentLoaded', () => {
     // Dummy data for demonstration. In a real application, this data should be fetched from a backend or local storage.
     const assembledDrones = [

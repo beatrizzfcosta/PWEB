@@ -3,13 +3,14 @@ body {
     overflow: hidden;
     font-family: Arial, sans-serif;
     background-image: url('../img/main.jpg');
-    background-size: cover;
     background-repeat: no-repeat;
     color: white;
 }
 
 main {
     padding: 20px;
+    overflow-y: auto;  /* Permite a rolagem vertical */
+    height: 100vh; 
 }
 
 h1 {

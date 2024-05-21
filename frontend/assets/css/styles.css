@@ -3,7 +3,6 @@ body {
     overflow: hidden;
     font-family: Arial, sans-serif;
     background-image: url('../img/main.jpg');
-    background-size: cover;
     background-repeat: no-repeat;
     color: white;
 }
@@ -38,7 +37,7 @@ footer {
     display: inline-block;
     border-right: 2px solid white;
     padding-right: 3px;
-    animation: typing 2s steps(20, end), blink-caret 1s step-end infinite alternate;
+    animation: blink-caret 0.5s step-end infinite alternate;
     white-space: nowrap;
     font-weight: bold;
     font-size: 25px;
@@ -50,15 +49,6 @@ footer {
     text-align: center;
 }
 
-@keyframes typing {
-    from {
-        width: 0
-    }
-
-    to {
-        width: 50%
-    }
-}
 
 @keyframes blink-caret {
 

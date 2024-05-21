@@ -1,4 +1,3 @@
-// inAssembly.js
 let droneCount = 0;
 
 function addNewDrone() {
@@ -60,24 +59,85 @@ function createModelSelection() {
 
 function createPartsSelection() {
     return `
-        <div class="parts">
-            <!-- Lista de peças aqui -->
-        </div>
-    `;
+    <div class="parts">
+        <h2>Seleção de Peças</h2>
+        <form>
+            <label>
+                <input type="checkbox" name="parts" value="Motor Brushless 2204">
+                Motor Brushless 2204
+            </label><br>
+            <label>
+                <input type="checkbox" name="parts" value="Controlador de Velocidade Eletrônico (ESC) 20A">
+                Controlador de Velocidade Eletrônico (ESC) 20A
+            </label><br>
+            <label>
+                <input type="checkbox" name="parts" value="Hélices 5045">
+                Hélices 5045
+            </label><br>
+        </form>
+    </div>
+`;
 }
 
 function createAvailabilityCheck() {
     return `
         <div class="availability">
-            <!-- Informações de disponibilidade aqui -->
+            <h2>Checagem de Disponibilidade</h2>
+            <p>Verifique se todas as peças selecionadas estão disponíveis em estoque antes de prosseguir com a montagem.</p>
+            <ul>
+                <li>Motor Brushless 2204: <span class="status">Disponível</span></li>
+                <li>ESC 20A: <span class="status">Indisponível</span></li>
+                <li>Hélices 5045: <span class="status">Disponível</span></li>
+                <li>Placa Controladora de Voo F4: <span class="status">Disponível</span></li>
+                <li>Bateria LiPo 1500mAh 4S: <span class="status">Disponível</span></li>
+                <li>Transmissor e Receptor de Rádio 2.4GHz: <span class="status">Disponível</span></li>
+                <li>Estrutura de Fibra de Carbono: <span class="status">Disponível</span></li>
+                <li>GPS Módulo: <span class="status">Disponível</span></li>
+                <li>LEDs para Orientação: <span class="status">Indisponível</span></li>
+            </ul>
+            <p>Nota: Para itens indisponíveis, considere fontes alternativas ou aguarde reposição.</p>
         </div>
     `;
 }
 
 function createTestingPhase() {
     return `
-        <p>Conclua a montagem e teste seu drone de acordo com as instruções fornecidas.</p>
-    `;
+    <div class="testing">
+        <h2>Fase de Testes</h2>
+        <p>Conclua a montagem e teste seu drone de acordo com as instruções fornecidas abaixo:</p>
+        <form>
+            <label>
+                <input type="checkbox" name="testing" value="Verificar conexões elétricas">
+                Verifique todas as conexões elétricas e assegure-se de que estão seguras.
+            </label><br>
+            <label>
+                <input type="checkbox" name="testing" value="Calibrar placa controladora de voo">
+                Calibre a placa controladora de voo utilizando o software apropriado.
+            </label><br>
+            <label>
+                <input type="checkbox" name="testing" value="Teste de motor">
+                Realize um teste de motor para garantir que todos estão funcionando corretamente.
+            </label><br>
+            <label>
+                <input type="checkbox" name="testing" value="Teste de rádio">
+                Teste a resposta do transmissor e receptor de rádio para garantir comunicação adequada.
+            </label><br>
+            <label>
+                <input type="checkbox" name="testing" value="Voo de teste">
+                Realize um voo de teste em um espaço aberto e seguro.
+            </label><br>
+            <label>
+                <input type="checkbox" name="testing" value="Monitorar temperatura">
+                Monitore a temperatura dos componentes durante o voo para evitar superaquecimento.
+            </label><br>
+            <label>
+                <input type="checkbox" name="testing" value="Ajustar configurações de voo">
+                Ajuste as configurações de voo conforme necessário para estabilidade e desempenho ideal.
+            </label>
+        </form>
+        <p>Se encontrar algum problema durante os testes, consulte o manual de solução de problemas ou procure ajuda em fóruns especializados.</p>
+    </div>
+`;
 }
 
 function toggleStep(drone, step) {
