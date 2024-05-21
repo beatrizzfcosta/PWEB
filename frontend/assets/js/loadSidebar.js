@@ -4,29 +4,33 @@ function loadSidebar() {
     const sidebarHTML = `
         <div class="sidebar">
             <div class="bar-icons">
-                <a href="#" class="icon-link profile-icon">
+                <a href="profile.html" class="icon-link profile-icon">
                     <img src="../assets/img/user-2.png" alt="User" class="icon profile-pic">
                     <span class="icon-text profile-text">Profile</span>
                 </a>
-                <a href="#" class="icon-link home-icon">
+                <a href="home.html" class="icon-link home-icon">
                     <img src="../assets/img/home-2.png" alt="Home" class="icon">
                     <span class="icon-text">Home</span>
                 </a>
-                <a href="#" class="icon-link assembled-icon">
+                <a href="inAssembly.html" class="icon-link assembled-icon">
                     <img src="../assets/img/mark-2.png" alt="Assembled" class="icon">
-                    <span class="icon-text">Assembled</span>
+                    <span class="icon-text">In Assembly</span>
                 </a>
-                <a href="#" class="icon-link assemblying-icon">
+                <a href="assembled.html" class="icon-link assemblying-icon">
                     <img src="../assets/img/time-2.png" alt="Assemblying" class="icon">
-                    <span class="icon-text">Assemblying</span>
+                    <span class="icon-text">Assembled</span>
                 </a>
                 <a href="storage.html" class="icon-link storage-icon">
                     <img src="../assets/img/storage-2.png" alt="Storage" class="icon">
                     <span class="icon-text">Storage</span>
                 </a>
-                <a href="#" class="icon-link models-icon">
+                <a href="models.html" class="icon-link models-icon">
                     <img src="../assets/img/fly.png" alt="Models" class="icon">
                     <span class="icon-text">Models</span>
+                </a>
+                <a href="stats.html" class="icon-link models-icon">
+                    <img src="../assets/img/graph.png" alt="Stats" class="icon">
+                    <span class="icon-text">Statistics</span>
                 </a>
                 <a href="#" class="icon-link logout-icon logout-link">
                     <img src="../assets/img/power-2.png" alt="Log out" class="icon">

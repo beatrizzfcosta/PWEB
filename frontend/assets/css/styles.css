@@ -2,7 +2,7 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    background-image: url('../img/main.jpg'); /* Adicione o caminho para sua imagem aqui */
+    background-image: url('../img/main.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     color: white;

@@ -1,0 +1,58 @@
+/* statistics.css */
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-image: url('../img/main.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+main {
+    margin-left: 80px;
+    padding: 20px;
+    overflow-y: auto;  /* Permite a rolagem vertical */
+    height: 100vh; 
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title-container h1 {
+    color: white;
+}
+
+.statistics-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+canvas {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 45%;    /* Define um tamanho menor para os gráficos */
+    max-height: 300px; /* Define uma altura máxima para os gráficos */
+}
+
+.stats-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.stats-summary div {
+    font-size: 1.2em;
+    color: #5490FF;
+}

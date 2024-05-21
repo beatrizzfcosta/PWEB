@@ -6,7 +6,7 @@ body {
 
 .container {
     display: flex; /* Para conseguir dividir a página ao meio */
-    background-color: #000;
+    background-image: url('../img/main.jpg');
     height: 100vh;
 }
 
