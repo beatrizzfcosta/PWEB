@@ -1,12 +1,12 @@
-let validNome = false;
+let validName = false;
 
-let validUsuario = false;
+let validUser = false;
 
 let validEmail = false;
 
-let validSenha = false;
+let validPassword = false;
 
-let validConfirmSenha = false;
+let validConfirmPassword = false;
 
 let msgError = document.getElementById('msgError')
 let msgSuccess = document.getElementById('msgSuccess')
@@ -24,20 +24,20 @@ function togglePasswordVisibility(inputId, icon) {
     }
 }
 
-function registar() {
+function register() {
     var firstName = document.getElementById('first-name').value;
     var lastName = document.getElementById('last-name').value;
-    var usuario = document.getElementById('username').value;
+    var user = document.getElementById('username').value;
     var email = document.getElementById('email').value;
-    var senha = document.getElementById('password').value;
-    var confirmSenha = document.getElementById('password-confirmation').value;
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('password-confirmation').value;
 
     console.log("First Name:", firstName);
     console.log("Last Name:", lastName);
     console.log("Email:", email);
-    console.log("Usuário:", usuario);
-    console.log("Senha:", senha);
-    console.log("Senha confirmada:", confirmSenha);
-    alert("Registando");
+    console.log("User:", user);
+    console.log("Password:", password);
+    console.log("Confirmed password:", confirmPassword);
+    alert("Verifying requirements, please wait...");
 }
 
