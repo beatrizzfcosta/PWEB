@@ -7,6 +7,12 @@ body {
     color: white;
 }
 
+main{
+    padding: 20px;
+    overflow-y: auto;  /* Permite a rolagem vertical */
+    height: 100vh; 
+}
+
 .search-bar {
     display: flex;
     justify-content: center;
@@ -69,10 +75,11 @@ body {
 }
 
 .component-grid .component {
-    border: 1px solid #ddd;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
 }
 
 .component-grid .component img {

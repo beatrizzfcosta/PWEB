@@ -29,7 +29,7 @@ function entrar() {
     }
 
     // Check if the username and password match the specified criteria
-    if (username === "beatriz" && password === "12345678") {
+    if (username === "aluno" && password === "aluno") {
         console.log("Usuário:", username);
         console.log("Senha:", password);
         msgError.innerText = "";
