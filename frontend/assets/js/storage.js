@@ -1,5 +1,3 @@
-// scripts.js
-
 // Array de componentes de exemplo
 const components = [
     { id: "motorA", name: "Motor A", category: "motores", date: "2024-05-20", quantity: 5 },
@@ -10,15 +8,15 @@ const components = [
     { id: "helice8", name: "Hélice 8x4.5", category: "hélices", date: "2024-05-25", quantity: 30 }
 ];
 
-// Função para exibir todos os componentes em formato de grid
-function showAllComponents() {
+
+// Função para exibir componentes em formato de grid
+function showComponents(filteredComponents) {
     const componentGrid = document.querySelector(".component-grid");
     componentGrid.innerHTML = "";
-    components.forEach(component => {
+    filteredComponents.forEach(component => {
         const componentElement = document.createElement("div");
         componentElement.classList.add("component");
         componentElement.innerHTML = `
-            <img src="caminho/para/imagem/${component.name}.jpg" alt="${component.name}">
             <p>${component.name}</p>
         `;
         componentElement.addEventListener("click", function() {
@@ -28,25 +26,42 @@ function showAllComponents() {
     });
 }
 
+// Função para exibir todos os componentes
+function showAllComponents() {
+    showComponents(components);
+}
+
 // Função para exibir componentes filtrados por categoria
 function showComponentsByCategory(category) {
-    const componentGrid = document.querySelector(".component-grid");
-    componentGrid.innerHTML = "";
-    components.forEach(component => {
-        if (category === "all" || component.category === category) {
-            const componentElement = document.createElement("div");
-            componentElement.classList.add("component");
-            componentElement.innerHTML = `
-                <img src="caminho/para/imagem/${component.name}.jpg" alt="${component.name}">
-                <p>${component.name}</p>
-            `;
-            componentElement.addEventListener("click", function() {
-                openModal(component);
-            });
-            componentGrid.appendChild(componentElement);
-        }
-    });
+    const filteredComponents = category === "all"
+        ? components
+        : components.filter(component => component.category === category);
+    showComponents(filteredComponents);
 }
+
+// Função para exibir componentes filtrados por termo de pesquisa
+function filterComponentsBySearchTerm(searchTerm) {
+    const filteredComponents = components.filter(component => {
+        return component.name.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    showComponents(filteredComponents);
+}
+
+// Evento de digitação na barra de pesquisa
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input", function() {
+    const searchTerm = this.value;
+    filterComponentsBySearchTerm(searchTerm);
+});
+
+// Evento de clique nos botões de categoria
+const categoryButtons = document.querySelectorAll(".category-btn");
+categoryButtons.forEach(button => {
+    button.addEventListener("click", function() {
+        const category = this.getAttribute("data-category");
+        showComponentsByCategory(category);
+    });
+});
 
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("componentModal");
@@ -57,26 +72,21 @@ document.addEventListener("DOMContentLoaded", function() {
         closeModal();
     });
 
-    // Evento de clique nos componentes
-    const componentGrid = document.querySelector(".component-grid");
-    componentGrid.addEventListener("click", function(event) {
-        if (!event.target.closest(".component")) {
-            closeModal();
-        }
-    });
-
     // Evento para fechar o modal quando clicar fora dele
     document.addEventListener("click", function(event) {
         if (!event.target.closest(".modal") && !event.target.closest(".component")) {
             closeModal();
         }
     });
+
+    // Exibir todos os componentes em formato de grid ao carregar a página
+    showAllComponents();
 });
 
 // Função para fechar o modal
 function closeModal() {
     const modal = document.getElementById("componentModal");
-    modal.style.display = "none"; // Esconde o modal
+    modal.style.display = "none";
 }
 
 // Função para abrir o modal com os dados do componente
@@ -102,29 +112,7 @@ function openModal(component) {
     modal.style.display = "block"; // Exibe o modal
 }
 
-// Evento de clique nos botões de categoria
-const categoryButtons = document.querySelectorAll(".category-btn");
-categoryButtons.forEach(button => {
-    button.addEventListener("click", function() {
-        const category = this.getAttribute("data-category");
-        showComponentsByCategory(category);
-    });
-});
-
-// Evento de digitação na barra de pesquisa
-const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("input", function() {
-    const searchTerm = this.value.toLowerCase();
-    const filteredComponents = components.filter(component => {
-        return component.name.toLowerCase().includes(searchTerm);
-    });
-    const category = document.querySelector(".category-btn.active").getAttribute("data-category");
-    if (category === "all") {
-        showAllComponents();
-    } else {
-        showComponentsByCategory(category);
-    }
-});
-
-// Exibir todos os componentes em formato de grid ao carregar a página
-showAllComponents();
+/*componentElement.innerHTML = `
+            <img src="caminho/para/imagem/${component.name}.jpg" alt="${component.name}">
+           <p>${component.name}</p>
+        `;*/

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelos de Drones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/models.css" />
+</head>
+
+<body>
+    <div id="sidebar-container"></div>
+    <main>
+        <section class="search-bar">
+            <input type="text" id="searchInput" placeholder="Pesquisar modelos...">
+        </section>
+        <section class="model-list">
+            <div class="model-grid"></div>
+        </section>
+        <div id="modelModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalCategory"></p>
+                <p id="modalDate"></p>
+                <p id="modalQuantity"></p>
+            </div>
+        </div>
+    </main>
+    <script src="../assets/js/loadSidebar.js"></script>
+    <script src="../assets/js/models.js"></script>
+</body>
+
+</html>
