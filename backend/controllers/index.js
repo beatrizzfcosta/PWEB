@@ -1,11 +1,10 @@
 //index.js
 
-//const login = require("./login/login");
-const user = require("./user/user");
-//const testing = require("./testing/womp");
+const express = require("express");
+const router = express.Router();
 
-module.exports = {
-  project,
-  user,
-  //testing,
-};
+const user = require("./user/user");
+
+router.use("/", user);
+
+module.exports = router;
