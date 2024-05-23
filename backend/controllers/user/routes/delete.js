@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 //delete
-router.delete("/", async (req, res) => {
+router.delete("/", (req, res) => {
 
   try {
     ///////////////////// DB code here /////////////////////

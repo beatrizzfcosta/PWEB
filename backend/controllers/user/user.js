@@ -3,16 +3,17 @@
 const express = require("express");
 const router = express.Router();
 
-const createUserRoutes = require("./routes/post");
-const deleteUserRoutes = require("./routes/delete");
-const patchUserRoutes = require("./routes/patch");
+const postUserRoute = require("./routes/post");
+const deleteUserRoute = require("./routes/delete");
+const patchUserRoute = require("./routes/patch");
+
 const loginRoutes = require("./login/login");
 const auth = require("../../middlewares/auth")
 
 router.use("/login", loginRoutes);
 
-router.use("/", /*auth,*/ createUserRoutes);
-router.use("/", /*auth,*/ deleteUserRoutes);
-router.use("/", /*auth,*/ patchUserRoutes);
+router.use("/", auth, postUserRoute);
+router.use("/", auth, deleteUserRoute);
+router.use("/", auth, patchUserRoute);
 
 module.exports = router;

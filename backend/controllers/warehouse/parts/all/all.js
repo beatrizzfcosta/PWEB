@@ -1,10 +1,10 @@
-//login.js
+//all.js
 
 const express = require("express");
 const router = express.Router();
 
-const loginRoutes = require("./routes/post");
+const getAllPartsRoute = require("./routes/get");
 
-router.use("/", loginRoutes);
+router.use("/", getAllPartsRoute);
 
 module.exports = router;

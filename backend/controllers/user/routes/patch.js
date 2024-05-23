@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 //patch
-router.patch("/", async (req, res) => {
+router.patch("/", (req, res) => {
   
   try {
     ///////////////////// DB code here /////////////////////
