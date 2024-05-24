@@ -3,7 +3,7 @@
 
 const app = require("./app");
 const connectDB = require('./database/database')
-const port = 15000;
+const port = process.env.PORT || 15000;
 
 const runServer = async () => {
 
