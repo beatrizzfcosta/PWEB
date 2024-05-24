@@ -1,14 +1,18 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "1. **Aggregate File (Folder Name):**\r    - Each folder in the controller directory contains an aggregate file named the same as the folder itself.\r    - The aggregate file serves to consolidate and export routes from the same level and one level below.\r    - This structure enables a recursive approach, allowing each layer to include the layer(s) below it.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
-  }
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.0"
+  },
+  "keywords": []
 }
