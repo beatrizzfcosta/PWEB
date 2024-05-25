@@ -3,8 +3,8 @@
 const express = require("express");
 const router = express.Router();
 var jwt = require("jsonwebtoken");
-const {JWT_SECRET} = require("../../configs");
-
+//const {JWT_SECRET} = require("../../configs");
+/*
 router.use((req, res, next) => {
   const token = req.headers.authorization;
 
@@ -30,5 +30,5 @@ router.use((req, res, next) => {
     });
   }
 });
-
+*/
 module.exports = router;
