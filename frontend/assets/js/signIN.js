@@ -25,7 +25,7 @@ async function entrar() {
     }
 
     try {
-        const response = await fetch('/user/login', {
+        const response = await fetch('http://localhost:15000/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

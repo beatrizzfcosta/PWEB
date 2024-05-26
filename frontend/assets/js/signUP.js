@@ -34,7 +34,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
       password
     };
   
-    fetch('/user', {
+    fetch('http://localhost:15000/user', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
