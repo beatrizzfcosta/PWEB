@@ -26,19 +26,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const assembledDronesContainer = document.getElementById('assembledDronesContainer');
     assembledDrones.forEach(drone => {
         const droneCard = document.createElement('div');
+        // é adicionada ao droneCard, o que permite estilizar este elemento com CSS.
         droneCard.classList.add('drone-card');
 
         const droneTitle = document.createElement('h2');
         droneTitle.innerText = `Drone ${drone.id} - ${drone.model}`;
+        //O droneTitle é então adicionado como filho ao droneCard.
         droneCard.appendChild(droneTitle);
 
         drone.steps.forEach(step => {
             const stepInfo = document.createElement('div');
             stepInfo.classList.add('step-info');
             stepInfo.innerHTML = `<span>${step.name}:</span> ${step.date}`;
+            //O droneCard é então adicionado como filho ao droneCard.
             droneCard.appendChild(stepInfo);
         });
 
+        // na div com id assembledDronesContainer adiciono para cada assembledDrones o objeto criado acima
         assembledDronesContainer.appendChild(droneCard);
     });
 });

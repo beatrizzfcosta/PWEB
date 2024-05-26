@@ -1,4 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
+    var welcomeText = "Welcome to Drone Assembly";
+    var descriptionText = "Your Platform for Managing Drone Assembly.";
+    var typingElement = document.getElementById('welcome');
+    var descriptionElement = document.getElementById('description');
+
+    // Função para exibir texto gradualmente
+    function typeWriter(text, element) {
+        var i = 0;
+        var speed = 100; // Velocidade de digitação (milissegundos)
+
+        function type() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        type();
+    }
+
+    // Iniciar o efeito de digitação
+    typeWriter(welcomeText, typingElement);
+    typeWriter(descriptionText, descriptionElement);
+});
+
+document.addEventListener('DOMContentLoaded', function () {
     var container = document.getElementById('container');
     var header = document.querySelector('header');
     var footer = document.querySelector('footer');
@@ -47,8 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const headerRect = header.getBoundingClientRect();
             const footerRect = footer.getBoundingClientRect();
 
-            const minCameraY = (-200 + headerRect.height) / containerRect.height * 10;
-            const maxCameraY = (containerRect.height - footerRect.height) / containerRect.height * 5;
+            const minCameraY = (-180 + headerRect.height) / containerRect.height * 10;
+            const maxCameraY = (containerRect.height - footerRect.height) / containerRect.height * 10;
 
             if (camera.position.y < minCameraY) {
                 camera.position.y = minCameraY;
@@ -82,28 +108,3 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    var welcomeText = "Welcome to Drone Assembly";
-    var descriptionText = "Your Platform for Managing Drone Assembly.";
-    var typingElement = document.getElementById('welcome');
-    var descriptionElement = document.getElementById('description');
-
-    // Função para exibir texto gradualmente
-    function typeWriter(text, element) {
-        var i = 0;
-        var speed = 100; // Velocidade de digitação (milissegundos)
-
-        function type() {
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, speed);
-            }
-        }
-        type();
-    }
-
-    // Iniciar o efeito de digitação
-    typeWriter(welcomeText, typingElement);
-    typeWriter(descriptionText, descriptionElement);
-});
