@@ -12,7 +12,7 @@ const auth = require("../../middlewares/auth")
 
 router.use("/login", loginRoutes);
 
-router.use("/", auth, postUserRoute);
+router.use("/", postUserRoute);
 router.use("/", auth, deleteUserRoute);
 router.use("/", auth, patchUserRoute);
 
