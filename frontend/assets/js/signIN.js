@@ -10,36 +10,44 @@ function togglePasswordVisibility(inputId, icon) {
         icon.classList.add('fa-eye');
     }
 }
-function entrar() {
-    var username = document.getElementById("email-username").value;
+
+
+async function entrar() {
+    var emailOrUsername = document.getElementById("email-username").value;
     var password = document.getElementById("password").value;
     var msgError = document.getElementById('msgError');
     var msgSuccess = document.getElementById('msgSuccess');
 
-    console.log("Username:", username); // Check if username is retrieved correctly
-    console.log("Password:", password); // Check if password is retrieved correctly
-    console.log("Error Message Element:", msgError); 
-
-     // Check if any field is empty
-     if (username === "" || password === "") {
+    if (emailOrUsername === "" || password === "") {
         msgError.innerText = "Por favor, preencha todos os campos.";
         msgSuccess.innerText = "";
-        console.log("Error Message Text:", msgError.innerText); // Check if error message text is set
-        return; // Exit the function early
+        return;
     }
 
-    // Check if the username and password match the specified criteria
-    if (username === "aluno" && password === "aluno") {
-        console.log("Usuário:", username);
-        console.log("Senha:", password);
-        msgError.innerText = "";
-        msgSuccess.innerText = "Entrando...";
-        // Redirect to home page
-        window.location.assign("home.html");
-    } else {
-        msgError.innerText = "Credenciais inválidas. Por favor, tente novamente.";
-        msgSuccess.innerText = "";
-        console.log("Error Message Text:", msgError.innerText); // Check if error message text is set
+    try {
+        const response = await fetch('/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: emailOrUsername, password: password })
+        });
 
+        const result = await response.json();
+
+        if (response.ok) {
+            msgError.innerText = "";
+            msgSuccess.innerText = "Entrando...";
+            // Salva o token no localStorage para usar em requisições futuras
+            localStorage.setItem('token', result.token);
+            window.location.assign("home.html");
+        } else {
+            msgError.innerText = result.message;
+            msgSuccess.innerText = "";
+        }
+    } catch (error) {
+        msgError.innerText = "Erro ao tentar fazer login. Tente novamente.";
+        msgSuccess.innerText = "";
+        console.error("Error during login:", error);
     }
 }

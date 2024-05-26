@@ -1,16 +1,3 @@
-let validName = false;
-
-let validUser = false;
-
-let validEmail = false;
-
-let validPassword = false;
-
-let validConfirmPassword = false;
-
-let msgError = document.getElementById('msgError')
-let msgSuccess = document.getElementById('msgSuccess')
-
 function togglePasswordVisibility(inputId, icon) {
     var input = document.getElementById(inputId);
     if (input.type === "password") {
@@ -24,20 +11,49 @@ function togglePasswordVisibility(inputId, icon) {
     }
 }
 
-function register() {
-    var firstName = document.getElementById('first-name').value;
-    var lastName = document.getElementById('last-name').value;
-    var user = document.getElementById('username').value;
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
-    var confirmPassword = document.getElementById('password-confirmation').value;
-
-    console.log("First Name:", firstName);
-    console.log("Last Name:", lastName);
-    console.log("Email:", email);
-    console.log("User:", user);
-    console.log("Password:", password);
-    console.log("Confirmed password:", confirmPassword);
-    alert("Verifying requirements, please wait...");
-}
-
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+  
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('password-confirmation').value;
+  
+    if (password !== confirmPassword) {
+      msgError.innerText = 'Passwords do not match';
+      return;
+    }
+  
+    const user = {
+      firstName,
+      lastName,
+      username,
+      email,
+      password
+    };
+  
+    fetch('/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === 'pending') {
+        msgSuccess.innerText = 'Registration successful! Please verify your email.';
+        msgError.innerText = '';
+      } else {
+        msgError.innerText = data.message;
+        msgSuccess.innerText = '';
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      msgError.innerText = 'An error occurred during registration';
+      msgSuccess.innerText = '';
+    });
+  });
