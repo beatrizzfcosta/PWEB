@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = require("../../../../configs/SECRET");
 const TIME_TO_LIVE = require("../../../../configs/token_expiration_time");
-const User = require("../../../models/user/user");
+const User = require("../../../../models/user/user");
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
