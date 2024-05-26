@@ -4,9 +4,13 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
+const reqInterceptor = require("./middlewares/gotYourReq");
 const routes = require("./controllers/index");
 
-//first arg is route, second is folder paths (do not mix both(this is a reminder for me fyi))
+// Use request interceptor middleware
+app.use(reqInterceptor);
+
+// Use routes
 app.use("/", routes);
 
 module.exports = app;
