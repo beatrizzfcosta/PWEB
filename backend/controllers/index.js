@@ -7,8 +7,8 @@ const user = require("./user/user");
 const warehouse = require("./warehouse/warehouse");
 const project = require("./project/project");
 
-router.use("/", user);
-router.use("/", warehouse);
-router.use("/", project);
+router.use("/user", user);
+router.use("/warehouse", warehouse);
+router.use("/project", project);
 
 module.exports = router;
