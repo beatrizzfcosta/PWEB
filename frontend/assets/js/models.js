@@ -122,7 +122,6 @@ function filterModelsBySearchTerm(searchTerm) {
     showModels(filteredModels);
 }
 
-// Evento de digitação na barra de pesquisa
 const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input", function() {
     const searchTerm = this.value;

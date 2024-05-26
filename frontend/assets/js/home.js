@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Função para exibir drones em montagem com barra de progresso
     function showDronesEmMontagem() {
+        //:nth-of-type(1): Seleciona o primeiro elemento do tipo especificado (neste caso, um elemento com a classe card).
         const container = document.querySelector(".card:nth-of-type(1)");
         dronesEmMontagem.forEach(drone => {
             const droneElement = document.createElement("div");
