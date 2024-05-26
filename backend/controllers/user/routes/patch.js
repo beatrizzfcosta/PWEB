@@ -1,8 +1,8 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 
 //patch
 router.patch("/", (req, res) => {
-  
   try {
     ///////////////////// DB code here /////////////////////
 
@@ -10,15 +10,12 @@ router.patch("/", (req, res) => {
       status: "success",
       message: "User information patched",
     });
-
   } catch (error) {
-
     console.error(error);
     return res.status(500).json({
       status: "fail",
       message: "Failed to patch user information",
     });
-
   }
 });
 

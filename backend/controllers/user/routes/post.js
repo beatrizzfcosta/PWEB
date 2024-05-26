@@ -1,18 +1,16 @@
 //user signup post
 
 const router = require("express").Router();
-var jwt = require("jsonwebtoken");
-const JWT_SECRET = require("../../../configs/SECRET");
-const TIME_TO_LIVE = require("../../../configs/token_expiration_time");
 const User = require("../../../models/user/user")
 const NewVerification = require("../../../models/user/userVerification")
-//Email verification stuff
 
+//Email verification stuff
 const nodemailer = require("nodemailer");
 const {v4: uuidv4} = require("uuid");
 require("dotenv").config();
 const bcrypt = require("bcrypt");
 const {join} = require("path");
+
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth:{
@@ -20,6 +18,7 @@ let transporter = nodemailer.createTransport({
     pass: process.env.AUTH_PASS
   }
 })
+
 transporter.verify((error,success)=>{
   if(error)
     console.error(error);
@@ -27,33 +26,34 @@ transporter.verify((error,success)=>{
     console.log("Ready for messages");
     console.log(success);
   }
-
 })
-//post
+///////////////////////////
 
-router.post("/signup", (req, res) => {
+//post
+router.post("/", (req, res) => {
   try {
     const { firstName,lastName,username,email, password } = req.body;
+
     if ( !firstName||!lastName || !username || !email || !password) {
       return res.status(400).send({
         status: 'error',
         mensagem: 'Missing something'
       });
     }
+
     if (!checkEmail(email) ) {
       return res.status(400).json({
         status: "Failur",
         message: "Email already in use",
       });
     }
+
     if (!checkUsername(username) ) {
       return res.status(400).json({
         status: "Failu",
         message: "Username already in use",
       });
     }
-
-    //const token = generateToken(firstName,lastName,username,email, password);
 
     User.create({
       firstName,
@@ -65,6 +65,7 @@ router.post("/signup", (req, res) => {
     }).then((result) => {
       sendVerificationEmail(result,res);
     });
+
   } catch (error) {
     res.status(500).json({
       status: "Fail",
@@ -149,26 +150,7 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
         res.redirect(`/user/verified/error=true&message=${message}`);
   })
 })
-function generateToken(firstName,lastName,username,email, password) {
-  const payload = { sub: email, name: password };
-  const token = jwt.sign(payload, JWT_SECRET, {
-    algorithm: "HS256",
-    expiresIn: TIME_TO_LIVE,
-  });
 
-  return token;
-}
-
-function checkEmail(email) {
-  // do mongo stuff to look if email is already in use
-  // maybe have this function in database folder on home
-  return true;
-}
-function checkUsername(username) {
-  // do mongo stuff to look if email is already in use
-  // maybe have this function in database folder on home
-  return true;
-}
 const sendVerificationEmail = ({_id,email},res) =>{
   const currentUrl = "http://localhost:15000/";
   const uniqueString = uuidv4() + _id;
@@ -211,8 +193,6 @@ const sendVerificationEmail = ({_id,email},res) =>{
                   })
         });
       })
-
-
 }
 
 module.exports = router;
