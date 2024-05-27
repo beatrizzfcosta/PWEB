@@ -134,11 +134,12 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
                           NewVerification
                               .deleteOne({userId})
                               .then(()=>{
-                                res.sendFile(join(__dirname, "../../../../frontend/pages/home.html"));
+                                res.sendFile(join(__dirname, "../../../../frontend/pages/mailValidation.html"));
                               })
                               .catch((error)=>{
-                                console.error("An error occurred while finalizing successful verification.")
-                                res.redirect(`/user/verified/error=true&message=${message}`);
+                                  console.error(error);
+                                  let message ="An error occurred while finalizing successful verification."
+                                    res.redirect(`/user/verified/error=true&message=${message}`);
                               })
                         })
                         .catch((error)=>{
@@ -147,7 +148,11 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
                           res.redirect(`/user/verified/error=true&message=${message}`);
                         })
                   }
-                  let message = "An error "
+
+                })
+                .catch((error)=>{
+                    console.error(error);
+
                 })
           }
 
