@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 var jwt = require("jsonwebtoken");
-const {JWT_SECRET} = require("../configs/SECRET");
+const JWT_SECRET = require("../configs/SECRET");
 
 router.use((req, res, next) => {
   const token = req.headers.authorization;
@@ -27,6 +27,7 @@ router.use((req, res, next) => {
     return res.status(401).json({
       status: "Failure",
       message: "Invalid token",
+      errorMsg : error.message,
     });
   }
 });
