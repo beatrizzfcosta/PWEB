@@ -27,7 +27,6 @@ router.use((req, res, next) => {
     return res.status(401).json({
       status: "Failure",
       message: "Invalid token",
-      errorMsg : error.message,
     });
   }
 });

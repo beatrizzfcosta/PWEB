@@ -50,13 +50,12 @@ router.post("/", async (req, res) => {
     res.status(500).json({
       status: "Failure",
       message: "Login failed",
-      error: error.message,
     });
   }
 });
 
 function generateToken(email, username) {
-  const payload = { sub: email, name: username };
+  const payload = { email: email, usrName: username };
   const token = jwt.sign(payload, JWT_SECRET, {
     algorithm: "HS256",
     expiresIn: TIME_TO_LIVE,

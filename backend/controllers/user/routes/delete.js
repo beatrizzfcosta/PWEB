@@ -5,7 +5,7 @@ const User = require("../../../models/user/user");
 //delete
 router.delete("/", async (req, res) => {
   try {
-    const userEmail = req.user.sub;
+    const userEmail = req.user.email;
 
     await User.findOneAndDelete({ email: userEmail });
 
