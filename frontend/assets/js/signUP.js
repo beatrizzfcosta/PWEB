@@ -13,14 +13,16 @@ function togglePasswordVisibility(inputId, icon) {
 
 document.querySelector('form').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
-  
+
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
     const username = document.getElementById('username').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('password-confirmation').value;
-  
+    const msgError = document.getElementById('msgError').value;
+    const msgSuccess = document.getElementById('msgError').value;
+
     if (password !== confirmPassword) {
       msgError.innerText = 'Passwords do not match';
       return;

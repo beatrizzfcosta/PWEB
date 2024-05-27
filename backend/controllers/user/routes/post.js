@@ -36,35 +36,47 @@ router.post("/", (req, res) => {
 
     if ( !firstName||!lastName || !username || !email || !password) {
       return res.status(400).send({
-        status: 'error',
+        status: 'fail',
         mensagem: 'Missing something'
       });
     }
 
     if (!checkEmail(email) ) {
       return res.status(400).json({
-        status: "Failur",
+        status: "fail",
         message: "Email already in use",
       });
     }
 
     if (!checkUsername(username) ) {
       return res.status(400).json({
-        status: "Failu",
+        status: "fail",
         message: "Username already in use",
       });
     }
+    const saltRounds = 10;
+    bcrypt
+        .hash(password,saltRounds)
+        .then((hashedPassword)=>{
+            User.create({
+                firstName,
+                lastName,
+                username,
+                email,
+                password: hashedPassword,
+                verification: false
+            }).then((result) => {
+                sendVerificationEmail(result,res);
 
-    User.create({
-      firstName,
-      lastName,
-      username,
-      email,
-      password,
-      verification: false
-    }).then((result) => {
-      sendVerificationEmail(result,res);
-    });
+            })
+            .catch((err)=>{
+                res.json({
+                    status:"fail",
+                    message:"An error occurred while saving user account!"
+                })
+            })
+        })
+
 
   } catch (error) {
     res.status(500).json({
@@ -102,7 +114,7 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
 
                 .catch((error)=>{
                   console.error(error);
-                  let message = "An error occured while checking for existing user verification record"
+                  let message = "An error occurred while checking for existing user verification record"
                   res.redirect(`/user/verified/error=true&message=${message}`);
                 })
           }else{
@@ -140,7 +152,7 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
           }
 
         }else{
-          let message = "Account record dosen't exist or has been verified already. Please sign up or log in.";
+          let message = "Account record doesn't exist or has been verified already. Please sign up or log in.";
           res.redirect(`/user/verified/error=true&message=${message}`);
         }
       })
@@ -152,7 +164,7 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
 })
 
 const sendVerificationEmail = ({_id,email},res) =>{
-  const currentUrl = "http://localhost:15000";
+  const currentUrl = "http://localhost:15000/";
   const uniqueString = uuidv4() + _id;
   const mailOptions = {
     from: process.env.AUTH_EMAIL,
@@ -160,7 +172,7 @@ const sendVerificationEmail = ({_id,email},res) =>{
     subject: "Verify Your Email",
     html: `<p>Verify your email address to complete the signup and login into your account.</p>
            <p>This link <b>expires in 6 hours</b>.</p>
-           <p>Press <a href=${currentUrl + "verify/" + _id + "/"+uniqueString }>here</a> to proceed.</p>`
+           <p>Press <a href=${currentUrl + "user/verify/" + _id + "/"+uniqueString }>here</a> to proceed.</p>`
   };
 
   const saltRounds = 10;

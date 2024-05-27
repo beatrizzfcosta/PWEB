@@ -30,7 +30,7 @@ async function entrar() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email: emailOrUsername, password: password })
+            body: JSON.stringify({ emailOrUsername: emailOrUsername, password: password })
         });
 
         const result = await response.json();
