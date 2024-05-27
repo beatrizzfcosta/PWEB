@@ -208,15 +208,22 @@ const sendVerificationEmail = ({_id,email},res) =>{
 }
 
 function checkEmail(email) {
-  // do mongo stuff to look if email is already in use
-  // maybe have this function in database folder on home
-  return true;
+    User.findOne({email: email})
+        .then(()=>{
+            return false;
+        });
+
+        return true;
+
 }
 
 function checkUsername(username) {
-  // do mongo stuff to look if email is already in use
-  // maybe have this function in database folder on home
-  return true;
+    User.findOne({username: username})
+        .then(()=>{
+            return false;
+        });
+
+    return true;
 }
 
 module.exports = router;
