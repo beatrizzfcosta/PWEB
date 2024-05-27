@@ -1,8 +1,9 @@
 //user signup post
 
 const router = require("express").Router();
-const User = require("../../../models/user/user")
-const NewVerification = require("../../../models/user/userVerification")
+const User = require("../../../models/user/user");
+const NewVerification = require("../../../models/user/userVerification");
+const {checkEmail, checkUsername} = require("../../../database/dbFunctions/dbF");
 
 //Email verification stuff
 const nodemailer = require("nodemailer");
@@ -54,6 +55,7 @@ router.post("/", (req, res) => {
         message: "Username already in use",
       });
     }
+
     const saltRounds = 10;
     bcrypt
         .hash(password,saltRounds)
@@ -77,7 +79,6 @@ router.post("/", (req, res) => {
             })
         })
 
-
   } catch (error) {
     res.status(500).json({
       status: "Fail",
@@ -93,9 +94,9 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
       .find({userId})
       .then((result)=>{
         if(result.length > 0){
-
           const {expiresAt} = result[0];
           const hashedUniqueString = result [0].uniqueString;
+
           if(expiresAt<Date.now()){
             NewVerification
                 .deleteOne({userId})
@@ -111,7 +112,6 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
                         res.redirect(`/user/verified/error=true&message=${message}`);
                       })
                 })
-
                 .catch((error)=>{
                   console.error(error);
                   let message = "An error occurred while checking for existing user verification record"
@@ -205,18 +205,6 @@ const sendVerificationEmail = ({_id,email},res) =>{
                   })
         });
       })
-}
-
-function checkEmail(email) {
-  // do mongo stuff to look if email is already in use
-  // maybe have this function in database folder on home
-  return true;
-}
-
-function checkUsername(username) {
-  // do mongo stuff to look if email is already in use
-  // maybe have this function in database folder on home
-  return true;
 }
 
 module.exports = router;

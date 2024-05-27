@@ -9,7 +9,7 @@ const TIME_TO_LIVE = require("../../../../configs/token_expiration_time");
 const User = require("../../../../models/user/user");
 
 router.post("/", async (req, res) => {
-  const { emailOrUsername, password } = req.body;
+  const {emailOrUsername, password} = req.body;
 
   if (!emailOrUsername || !password) {
     return res.status(400).json({
