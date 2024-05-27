@@ -1,5 +1,6 @@
 //server.js
 
+const path = require('path');
 const app = require("./app");
 const connectDB = require('./database/database')
 const port = process.env.PORT || 15000;
@@ -17,6 +18,7 @@ const runServer = async () => {
       );
       console.log("+===========================================+");
     });
+
   } catch (error) {
     console.error("Server error:", error);
     process.exit(1); // Exit the process with a failure code

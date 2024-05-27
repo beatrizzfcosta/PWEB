@@ -9,9 +9,9 @@ const TIME_TO_LIVE = require("../../../../configs/token_expiration_time");
 const User = require("../../../../models/user/user");
 
 router.post("/", async (req, res) => {
-  const { email, password } = req.body;
+  const {emailOrUsername, password} = req.body;
 
-  if (!email || !password) {
+  if (!emailOrUsername || !password) {
     return res.status(400).json({
       status: "Failure",
       message: "Email and password are required",
@@ -19,21 +19,23 @@ router.post("/", async (req, res) => {
   }
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({
+      $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
+    });
 
     if (!user) {
       return res.status(401).json({
         status: "Failure",
-        message: "Invalid email or password",
+        message: "Couldn't find user",
       });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
-
+    console.log(isPasswordValid)
     if (!isPasswordValid) {
       return res.status(401).json({
         status: "Failure",
-        message: "Invalid email or password",
+        message: "Password not valid",
       });
     }
 
