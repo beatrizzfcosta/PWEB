@@ -6,9 +6,9 @@ body {
     background-repeat: no-repeat;
     color: white;
     display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 .container {
     text-align: center;
@@ -16,6 +16,8 @@ body {
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     padding: 20px;
+    transition: transform 0.3s ease; /* Adicionando uma transição suave */
+    transform-style: preserve-3d; /* Mantendo os elementos 3D */
 }
 h1 {
     color: #5490FF;
@@ -39,4 +41,7 @@ h2 {
 }
 .button:hover {
     background-color: #06347a;
+}
+.container:hover {
+    transform: rotateX(5deg); /* Inclinação para baixo ao passar o mouse */
 }
