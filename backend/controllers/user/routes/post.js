@@ -152,7 +152,7 @@ router.get("/verify/:userId/:uniqueString",(req,res)=>{
 })
 
 const sendVerificationEmail = ({_id,email},res) =>{
-  const currentUrl = "http://localhost:15000/";
+  const currentUrl = "http://localhost:15000";
   const uniqueString = uuidv4() + _id;
   const mailOptions = {
     from: process.env.AUTH_EMAIL,
@@ -193,6 +193,18 @@ const sendVerificationEmail = ({_id,email},res) =>{
                   })
         });
       })
+}
+
+function checkEmail(email) {
+  // do mongo stuff to look if email is already in use
+  // maybe have this function in database folder on home
+  return true;
+}
+
+function checkUsername(username) {
+  // do mongo stuff to look if email is already in use
+  // maybe have this function in database folder on home
+  return true;
 }
 
 module.exports = router;
