@@ -6,8 +6,8 @@ const User = require("../../../models/user/user");
 router.delete("/", async (req, res) => {
   try {
     const userEmail = req.user.sub;
-    
-    const result = await User.findOneAndDelete({ email: userEmail });
+
+    await User.findOneAndDelete({ email: userEmail });
 
     return res.json({
       status: "success",
