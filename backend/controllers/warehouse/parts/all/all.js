@@ -5,6 +5,6 @@ const router = express.Router();
 
 const getAllPartsRoute = require("./routes/get");
 
-router.use("/", getAllPartsRoute);
+//router.use("/", getAllPartsRoute);
 
 module.exports = router;
