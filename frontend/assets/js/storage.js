@@ -1,45 +1,17 @@
-// Array de componentes de exemplo
-const components = [
-    { id: "motorA", name: "Motor A", category: "motores", date: "2024-05-20", quantity: 5 },
-    { id: "motorB", name: "Motor B", category: "motores", date: "2024-05-21", quantity: 10 },
-    { id: "bateria2000", name: "Bateria de Lítio 2000mAh", category: "baterias", date: "2024-05-22", quantity: 20 },
-    { id: "bateria3000", name: "Bateria de Lítio 3000mAh", category: "baterias", date: "2024-05-23", quantity: 15 },
-    { id: "helice10", name: "Hélice 10x4.5", category: "hélices", date: "2024-05-24", quantity: 25 },
-    { id: "helice8", name: "Hélice 8x4.5", category: "hélices", date: "2024-05-25", quantity: 30 }
-];
-
-
-// Função para exibir componentes em formato de grid
-function showComponents(filteredComponents) {
-    const componentGrid = document.querySelector(".component-grid");
-    componentGrid.innerHTML = "";
-    filteredComponents.forEach(component => {
-        const componentElement = document.createElement("div");
-        componentElement.classList.add("component");
-        componentElement.innerHTML = `
-            <p>${component.name}</p>
-        `;
-        componentElement.addEventListener("click", function() {
-            openModal(component);
-        });
-        componentGrid.appendChild(componentElement);
-    });
+// Função para buscar os componentes do backend
+async function fetchComponents() {
+    try {
+        const response = await fetch('http://localhost:15000/warehouse/part');
+        if (!response.ok) {
+            throw new Error('Failed to fetch components');
+        }
+        const data = await response.json();
+        showComponents(data.part); 
+    } catch (error) {
+        console.error('Error fetching components:', error);
+    }
 }
 
-// Função para exibir todos os componentes
-function showAllComponents() {
-    showComponents(components);
-}
-
-// Função para exibir componentes filtrados por categoria
-function showComponentsByCategory(category) {
-    const filteredComponents = category === "all"
-        ? components
-        : components.filter(component => component.category === category);
-    showComponents(filteredComponents);
-}
-
-// Função para exibir componentes filtrados por termo de pesquisa
 function filterComponentsBySearchTerm(searchTerm) {
     const filteredComponents = components.filter(component => {
         return component.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -47,7 +19,13 @@ function filterComponentsBySearchTerm(searchTerm) {
     showComponents(filteredComponents);
 }
 
-// Evento de digitação na barra de pesquisa
+function showComponentsByCategory(category) {
+    const filteredComponents = components.filter(component => {
+        return component.type.toLowerCase() === category.toLowerCase();
+    });
+    showComponents(filteredComponents);
+}
+
 const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input", function() {
     const searchTerm = this.value;
@@ -62,6 +40,32 @@ categoryButtons.forEach(button => {
         showComponentsByCategory(category);
     });
 });
+
+// Função para exibir as peças em formato de grid
+function showComponents(components) {
+    const componentGrid = document.querySelector(".component-grid");
+    componentGrid.innerHTML = "";
+    components.forEach(component => {
+        const componentElement = document.createElement("div");
+        componentElement.classList.add("component");
+        componentElement.innerHTML = `
+            <p>${component.name}</p>
+            <p>${component.type}</p>
+            <p>${component.specifications}</p>
+            <p>${component.quantity}</p>
+        `;
+        componentElement.addEventListener("click", function() {
+            openModal(component);
+        });
+        componentGrid.appendChild(componentElement);
+    });
+}
+
+// Função para exibir todos os componentes ao carregar a página
+document.addEventListener("DOMContentLoaded", function() {
+    fetchComponents();
+});
+
 
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("componentModal");
@@ -80,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Exibir todos os componentes em formato de grid ao carregar a página
-    showAllComponents();
+    fetchComponents()
 });
 
 // Função para fechar o modal
@@ -111,8 +115,3 @@ function openModal(component) {
 
     modal.style.display = "block"; // Exibe o modal
 }
-
-/*componentElement.innerHTML = `
-            <img src="caminho/para/imagem/${component.name}.jpg" alt="${component.name}">
-           <p>${component.name}</p>
-        `;*/
