@@ -49,5 +49,6 @@ async function entrar() {
         msgError.innerText = "Erro ao tentar fazer login. Tente novamente.";
         msgSuccess.innerText = "";
         console.error("Error during login:", error);
+        //boas
     }
 }
