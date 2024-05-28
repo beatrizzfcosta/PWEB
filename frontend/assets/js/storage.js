@@ -1,9 +1,16 @@
 // Função para buscar os componentes do backend
 async function fetchComponents() {
     try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            throw new Error('Token not found in local storage');
+        }
+
         const response = await fetch('http://localhost:15000/warehouse/part', {
             method: 'GET',
             headers: {
+                'Authorization': token,
                 'Content-Type': 'application/json'
             },
         });
@@ -11,8 +18,9 @@ async function fetchComponents() {
         if (!response.ok) {
             throw new Error('Failed to fetch components');
         }
-        const data = await response.json();
-        showComponents(data.part); 
+        
+        const components = await response.json();
+        showComponents(components.part); 
     } catch (error) {
         console.error('Error fetching components:', error);
     }
