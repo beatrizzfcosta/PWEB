@@ -1,7 +1,13 @@
 // Função para buscar os componentes do backend
 async function fetchComponents() {
     try {
-        const response = await fetch('http://localhost:15000/warehouse/part');
+        const response = await fetch('http://localhost:15000/warehouse/part', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        
         if (!response.ok) {
             throw new Error('Failed to fetch components');
         }
