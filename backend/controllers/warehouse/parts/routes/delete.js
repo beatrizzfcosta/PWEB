@@ -6,9 +6,9 @@ const Part = require("../../../../models/peca/peca");
 
 router.delete("/", async (req, res) => {
   try {
-    const id = req.body.id;
+    const name = req.body.name;
 
-    await Part.findOneAndDelete({ partId: id });
+    await Part.findOneAndDelete({ name: name });
 
     return res.json({
       status: "success",
