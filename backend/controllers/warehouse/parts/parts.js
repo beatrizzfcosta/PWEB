@@ -10,7 +10,7 @@ const patchPartRoute = require("./routes/patch");
 
 //this route is for the purpose of acting not on a individual scale but on multiple or all
 const allRoutes = require("./all/all");
-const auth = require("../../middlewares/auth");
+const auth = require("../../../middlewares/auth");
 
 router.use("/allRoutes", allRoutes);
 

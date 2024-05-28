@@ -19,6 +19,6 @@ const partSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const peca = mongoose.model('Drone', partSchema);
+const peca = mongoose.model('Peca', partSchema);
 
 module.exports = peca;
