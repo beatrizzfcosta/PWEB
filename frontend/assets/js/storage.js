@@ -1,5 +1,5 @@
 // Função para buscar os componentes do backend
-async function fetchComponents() {
+async function getData() {
     try {
         const token = localStorage.getItem('token');
 
@@ -14,30 +14,59 @@ async function fetchComponents() {
                 'Content-Type': 'application/json'
             },
         });
-        
+
         if (!response.ok) {
             throw new Error('Failed to fetch components');
         }
-        
-        const components = await response.json();
-        showComponents(components.part); 
+
+        const data = await response.json();
+        return data.part;
     } catch (error) {
         console.error('Error fetching components:', error);
     }
 }
 
-function filterComponentsBySearchTerm(searchTerm, components) {
-    const filteredComponents = components.filter(component => {
-        return component.name.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-    showComponents(filteredComponents);
+async function fetchComponents() {
+    try {
+        const components = await getData();
+        if (components) {
+            showComponents(components);
+        }
+    } catch (error) {
+        console.error('Error fetching components:', error);
+    }
 }
 
-function showComponentsByCategory(category, components) {
-    const filteredComponents = components.filter(component => {
-        return component.type.toLowerCase() === category.toLowerCase();
-    });
-    showComponents(filteredComponents);
+async function filterComponentsBySearchTerm(searchTerm) {
+    try {
+        const components = await getData();
+        if (components) {
+            const filteredComponents = components.filter(component => {
+                return component.name.toLowerCase().includes(searchTerm.toLowerCase());
+            });
+            showComponents(filteredComponents);
+        }
+    } catch (error) {
+        console.error('Error filtering components by search term:', error);
+    }
+}
+
+async function showComponentsByCategory(category) {
+    try {
+        const components = await getData();
+        if (components) {
+            const filteredComponents = components.filter(component => {
+                return component.type.toLowerCase() === category.toLowerCase();
+            });
+            console.log(filteredComponents);
+            if(category === "all"){
+                return showComponents(components);
+            }
+            showComponents(filteredComponents);
+        }
+    } catch (error) {
+        console.error('Error filtering components by category:', error);
+    }
 }
 
 const searchInput = document.getElementById("searchInput");
@@ -80,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchComponents();
 });
 
-
+// Configuração do modal
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("componentModal");
     const closeButton = document.querySelector(".close");
@@ -98,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Exibir todos os componentes em formato de grid ao carregar a página
-    fetchComponents()
+    fetchComponents();
 });
 
 // Função para fechar o modal
@@ -123,7 +152,7 @@ function openModal(component) {
     }
 
     modalTitle.textContent = component.name;
-    modalCategory.textContent = "Category: " + component.category;
+    modalCategory.textContent = "Category: " + component.type;
     modalDate.textContent = "Date: " + component.date;
     modalQuantity.textContent = "Quantity: " + component.quantity;
 
