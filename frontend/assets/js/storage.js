@@ -26,14 +26,14 @@ async function fetchComponents() {
     }
 }
 
-function filterComponentsBySearchTerm(searchTerm) {
+function filterComponentsBySearchTerm(searchTerm, components) {
     const filteredComponents = components.filter(component => {
         return component.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
     showComponents(filteredComponents);
 }
 
-function showComponentsByCategory(category) {
+function showComponentsByCategory(category, components) {
     const filteredComponents = components.filter(component => {
         return component.type.toLowerCase() === category.toLowerCase();
     });
