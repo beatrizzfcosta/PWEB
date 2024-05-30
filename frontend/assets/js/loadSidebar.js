@@ -199,7 +199,7 @@ function loadSidebar() {
     
     #sidebar-toggle.selected #sidebar-toggle-icon {
         content: url('../assets/img/arrow-2.png');
-        transform: scaleY(-1);
+        transform: scaleX(-1);
         
     }
     
