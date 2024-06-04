@@ -1,53 +1,107 @@
+:root {
+    --tran-05: 0.5s; 
+    --body-color-dark: #242526; 
+    --light-text-color: #3a3b3c; 
+    --light-bg-color: #f0f0f0; 
+    --dark-text-color: #ccc; 
+    --dark-bg-color: #3a3b3c; 
+    --input-bg-color-light: #9fb3c8;
+    --input-text-color-light: #707070; 
+    --input-bg-color-dark: #3a3b3c; 
+    --input-text-color-dark: #ffffff; 
+}
+
 body {
     margin: 0;
     overflow: hidden;
+    overflow-y: auto; /* Permite rolagem vertical */
     font-family: Arial, sans-serif;
-    color: white;
+    color: var(--dark-text-color); /* Define a cor de texto inicial */
     transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
 }
 
-body.dark {
-    background-color: var(--body-color-dark); /* Define a cor de fundo no modo dark */
+body.light {
+    background-color: var(--light-bg-color); /* Cor de fundo no modo claro */
+    color: var(--light-text-color);
 }
 
-main{
-    padding: 20px;
-    overflow-y: auto;  /* Permite a rolagem vertical */
-    height: 100vh; 
-    position: relative;
-    z-index: 1; 
-    margin-left: 100px;
+body.dark {
+    background-color: var(--dark-bg-color); /* Cor de fundo no modo escuro */
+    color: var(--dark-text-color);
 }
+
+main {
+    margin-left: 80px;
+    padding: 20px;
+    height: 100vh; /* Para garantir que ocupe a altura total da viewport */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centraliza verticalmente */
+    position: relative;
+    z-index: 1;
+}
+
 .title-container {
+    position: absolute;
+    top: 20px; /* Posição no topo */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    padding: 10px;
 }
 
-.title-container h1 {
-    color: white;
+body.dark .title-container h1 {
+    color: var(--dark-text-color);
 }
 
-.drone-card {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
+body.light .title-container h1 {
+    color: var(--light-text-color);
+}
+
+body.light .drone-card {
+    background-color: var(--light-bg-color);
+    max-width: 1200px;
+    border-radius: 20px;
     padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    color: white;
+    color: var(--light-text-color);
 }
 
-.drone-card h2 {
+body.dark .drone-card {
+    background-color: var(--dark-bg-color);
+    max-width: 1200px;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: var(--dark-text-color);
+}
+
+body.dark .drone-card h2 {
     margin: 0;
     padding-bottom: 10px;
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ccc;
+}
+
+body.light .drone-card h2 {
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #3a3b3c;
 }
 
 .drone-card .step-info {
     margin: 10px 0;
 }
 
-.drone-card .step-info span {
+body.light .drone-card .step-info span {
     font-weight: bold;
-    color: #5490FF;
+    color: var(--light-text-color);
+}
+
+body.dark .drone-card .step-info span {
+    font-weight: bold;
+    color: var(--dark-text-color);
 }

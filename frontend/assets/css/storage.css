@@ -161,17 +161,22 @@ body.light .category-btn {
     border-radius: 20px;
 }
 
-.component-grid .component {
-    background-color: rgba(0, 0, 0, 0.7);
+body.light .component-grid .component {
+    background-color: var(--light-bg-color);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    color: white;
+    color: var(--light-text-color);
 }
 
-.component-grid .component img {
-    max-width: 100%;
+body.light .component-grid .component {
+    background-color: var(--dark-bg-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: var(--dark-text-color);
 }
+
 
 /* Estilos para o modal */
 body.light .modal {
