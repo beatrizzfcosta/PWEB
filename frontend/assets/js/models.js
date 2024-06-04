@@ -130,6 +130,7 @@ searchInput.addEventListener("input", function() {
 
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("modelModal");
+const overlay = document.getElementById("overlay");
     const closeButton = document.querySelector(".close");
 
     // Evento de clique no botão de fechar
@@ -151,7 +152,9 @@ document.addEventListener("DOMContentLoaded", function() {
 // Função para fechar o modal
 function closeModal() {
     const modal = document.getElementById("modelModal");
+    const overlay = document.getElementById("overlay");
     modal.style.display = "none";
+    overlay.style.display = "none";
 }
 
 // Função para abrir o modal com os dados do modelo
@@ -159,6 +162,7 @@ function openModal(model) {
     closeModal(); // Fecha o modal antes de abrir um novo
 
     const modal = document.getElementById("modelModal");
+    const overlay = document.getElementById("overlay");
     const modalTitle = document.getElementById("modalTitle");
     const modalCategory = document.getElementById("modalCategory");
     const modalDate = document.getElementById("modalDate");
@@ -175,4 +179,5 @@ function openModal(model) {
     modalQuantity.textContent = "Quantity: " + model.quantity;
 
     modal.style.display = "block"; // Exibe o modal
+    overlay.style.display = "block"; // Exibe o overlay
 }
