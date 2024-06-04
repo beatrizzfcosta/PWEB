@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const Part = require("../../../../models/peca/peca");
+const Part = require("../../../../models/part/part");
 
 router.post("/", (req, res) => {
   try{

@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const Part = require("../../../../models/peca/peca");
+const Part = require("../../../../models/part/part");
 
 router.get("/", async (req, res) => {
   try {
@@ -19,8 +19,8 @@ router.get("/", async (req, res) => {
           else{
             return res.json({
               status: "success",
-              message: "Part something something",
-              part: result,
+              message: "Sent all parts",
+              data: result,
             });
 
           }
@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
           console.error(error);
           return res.status(400).json({
             status: "fail",
-            message: "Error trying to find a part.",
+            message: "Error while trying to find a part.",
           });
         });
 

@@ -4,10 +4,13 @@ const Schema = mongoose.Schema;
 const partSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true },
+        required: true,
+        unique: true
+    },
     type: {
         type: String,
-        required: true },
+        required: true
+    },
     specifications: {
         type: String
     },
@@ -19,6 +22,6 @@ const partSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const peca = mongoose.model('Peca', partSchema);
+const part = mongoose.model('Part', partSchema);
 
-module.exports = peca;
+module.exports = part;
