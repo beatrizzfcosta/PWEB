@@ -4,7 +4,7 @@ const Drone = require('../drone/drone')
 const User = require('../user/user')
 const projectSchema = new mongoose.Schema({
     name: {
-        type: string,
+        type: String,
         required: true
     },
     drone: {
