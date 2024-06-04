@@ -1,96 +1,43 @@
 // Array de modelos de exemplo
-const models = [
-    {
-        id: "droneA",
-        name: "Drone A",
-        category: "quadcopter",
-        date: "2024-05-20",
-        quantity: 5,
-        components: {
-            motors: { id: "motorA", quantity: 4 },
-            battery: { id: "battery2000", quantity: 1 },
-            propellers: { id: "propeller10", quantity: 4 },
-            flightController: { id: "fcA", quantity: 1 },
-            frame: { id: "frameA", quantity: 1 },
-            gps: { id: "gpsA", quantity: 1 },
-        },
-    },
-    {
-        id: "droneB",
-        name: "Drone B",
-        category: "quadcopter",
-        date: "2024-05-21",
-        quantity: 10,
-        components: {
-            motors: { id: "motorB", quantity: 4 },
-            battery: { id: "battery3000", quantity: 1 },
-            propellers: { id: "propeller8", quantity: 4 },
-            flightController: { id: "fcB", quantity: 1 },
-            frame: { id: "frameA", quantity: 1 },
-            gps: { id: "gpsB", quantity: 1 },
-        },
-    },
-    {
-        id: "droneC",
-        name: "Drone C",
-        category: "fixed-wing",
-        date: "2024-05-22",
-        quantity: 20,
-        components: {
-            motors: { id: "motorA", quantity: 1 },
-            battery: { id: "battery2000", quantity: 1 },
-            propellers: { id: "propeller10", quantity: 1 },
-            flightController: { id: "fcA", quantity: 1 },
-            frame: { id: "frameB", quantity: 1 },
-            gps: { id: "gpsA", quantity: 1 },
-        },
-    },
-    {
-        id: "droneD",
-        name: "Drone D",
-        category: "fixed-wing",
-        date: "2024-05-23",
-        quantity: 15,
-        components: {
-            motors: { id: "motorB", quantity: 1 },
-            battery: { id: "battery3000", quantity: 1 },
-            propellers: { id: "propeller8", quantity: 1 },
-            flightController: { id: "fcB", quantity: 1 },
-            frame: { id: "frameB", quantity: 1 },
-            gps: { id: "gpsB", quantity: 1 },
-        },
-    },
-    {
-        id: "droneE",
-        name: "Drone E",
-        category: "helicopter",
-        date: "2024-05-24",
-        quantity: 25,
-        components: {
-            motors: { id: "motorA", quantity: 1 },
-            battery: { id: "battery2000", quantity: 1 },
-            propellers: { id: "propeller10", quantity: 2 },
-            flightController: { id: "fcA", quantity: 1 },
-            frame: { id: "frameC", quantity: 1 },
-            gps: { id: "gpsA", quantity: 1 },
-        },
-    },
-    {
-        id: "droneF",
-        name: "Drone F",
-        category: "helicopter",
-        date: "2024-05-25",
-        quantity: 30,
-        components: {
-            motors: { id: "motorB", quantity: 1 },
-            battery: { id: "battery3000", quantity: 1 },
-            propellers: { id: "propeller8", quantity: 2 },
-            flightController: { id: "fcB", quantity: 1 },
-            frame: { id: "frameC", quantity: 1 },
-            gps: { id: "gpsB", quantity: 1 },
-        },
-    },
-];
+async function getDrones() {
+    try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            throw new Error('Token not found in local storage');
+        }
+
+        const response = await fetch('http://localhost:15000/warehouse', {
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch components');
+        }
+
+        const data = await response.json();
+        console.log(data)
+        return data.data;
+    } catch (error) {
+        console.error('Error fetching components:', error);
+    }
+}
+async function fetchDrones() {
+    try {
+        const drones = await getDrones();
+        console.log(drones)
+        if (drones) {
+            console.log("2")
+            showModels(drones);
+        }
+    } catch (error) {
+        console.error('Error fetching components:', error);
+    }
+}
 
 // Função para exibir modelos em formato de grid
 function showModels(filteredModels) {
@@ -100,7 +47,7 @@ function showModels(filteredModels) {
         const modelElement = document.createElement("div");
         modelElement.classList.add("model");
         modelElement.innerHTML = `
-            <p>${model.name}</p>
+            <p>${model.model}</p>
         `;
         modelElement.addEventListener("click", function() {
             openModal(model);
@@ -110,13 +57,15 @@ function showModels(filteredModels) {
 }
 
 // Função para exibir todos os modelos
-function showAllModels() {
-    showModels(models);
+async function showAllModels() {
+    const components = await getDrones();
+    showModels(components);
 }
 
 // Função para exibir modelos filtrados por termo de pesquisa
-function filterModelsBySearchTerm(searchTerm) {
-    const filteredModels = models.filter(model => {
+async function filterModelsBySearchTerm(searchTerm) {
+    const components = await getData();
+    const filteredModels = components.filter(model => {
         return model.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
     showModels(filteredModels);
@@ -131,7 +80,7 @@ searchInput.addEventListener("input", function() {
 document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("modelModal");
     const closeButton = document.querySelector(".close");
-
+    fetchDrones();
     // Evento de clique no botão de fechar
     closeButton.addEventListener("click", function() {
         closeModal();
@@ -145,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Exibir todos os modelos em formato de grid ao carregar a página
-    showAllModels();
+
 });
 
 // Função para fechar o modal
@@ -169,9 +118,8 @@ function openModal(model) {
         return;
     }
 
-    modalTitle.textContent = model.name;
-    modalCategory.textContent = "Category: " + model.category;
-    modalDate.textContent = "Date: " + model.date;
+    modalTitle.textContent = model.model;
+    modalCategory.textContent = "Category: " + model.manufacturer;
     modalQuantity.textContent = "Quantity: " + model.quantity;
 
     modal.style.display = "block"; // Exibe o modal

@@ -40,7 +40,7 @@ async function entrar() {
             msgSuccess.innerText = "Entrando...";
             // Salva o token no localStorage para usar em requisições futuras
             localStorage.setItem('token', result.token);
-            window.location.assign("home.html");
+            window.location.assign("models.html");
         } else {
             msgError.innerText = result.message;
             msgSuccess.innerText = "";
