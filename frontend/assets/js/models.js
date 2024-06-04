@@ -20,7 +20,6 @@ async function getDrones() {
         }
 
         const data = await response.json();
-        console.log(data)
         return data.data;
     } catch (error) {
         console.error('Error fetching components:', error);
@@ -29,9 +28,7 @@ async function getDrones() {
 async function fetchDrones() {
     try {
         const drones = await getDrones();
-        console.log(drones)
         if (drones) {
-            console.log("2")
             showModels(drones);
         }
     } catch (error) {
@@ -81,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const modal = document.getElementById("modelModal");
 const overlay = document.getElementById("overlay");
     const closeButton = document.querySelector(".close");
-    fetchDrones();
+
     // Evento de clique no botão de fechar
     closeButton.addEventListener("click", function() {
         closeModal();
@@ -95,13 +92,19 @@ const overlay = document.getElementById("overlay");
     });
 
     // Exibir todos os modelos em formato de grid ao carregar a página
-
+    fetchDrones();
 });
 
 // Função para fechar o modal
 function closeModal() {
     const modal = document.getElementById("modelModal");
     const overlay = document.getElementById("overlay");
+
+    // Remove all child elements from the modal
+    while (modal.firstChild) {
+        modal.removeChild(modal.firstChild);
+    }
+
     modal.style.display = "none";
     overlay.style.display = "none";
 }
@@ -117,15 +120,25 @@ function openModal(model) {
     const modalDate = document.getElementById("modalDate");
     const modalQuantity = document.getElementById("modalQuantity");
 
-    if (!modal || !modalTitle || !modalCategory || !modalDate || !modalQuantity) {
-        console.log("Elemento do modal não encontrado");
-        return;
-    }
 
-    modalTitle.textContent = model.model;
-    modalCategory.textContent = "Category: " + model.manufacturer;
+
+    model.compatibleType.forEach(drone => {
+        // Assuming each 'compatible' object has a 'drone' property
+
+        const modalCard = document.createElement('div');
+        modalCard.classList.add('drone-card');
+
+
+        const stepInfo = document.createElement('div');
+        stepInfo.classList.add('step-info');
+        stepInfo.innerHTML = `<span>${drone.type}:</span> ${drone.amountNeeded}`;
+        modalCard.appendChild(stepInfo);
+        modal.appendChild(modalCard);
+    });
+
     modalQuantity.textContent = "Quantity: " + model.quantity;
-
+    console.log(model.compatibleType[0].type)
     modal.style.display = "block"; // Exibe o modal
     overlay.style.display = "block"; // Exibe o overlay
 }
+
