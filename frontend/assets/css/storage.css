@@ -161,20 +161,26 @@ body.light .category-btn {
     border-radius: 20px;
 }
 
-body.light .component-grid .component {
-    background-color: var(--light-bg-color);
+body.dark .component-grid .component {
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /* Gradient background */
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color: var(--dark-text-color); /* Text color */
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    color: var(--light-text-color);
 }
 
 body.light .component-grid .component {
-    background-color: var(--dark-bg-color);
+    background: 
+    linear-gradient(var(--light-bg-color) 0 0) padding-box, /* Gradient background */
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color: var(--light-text-color); /* Definindo a cor do texto para preto no modo light */
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 20px;
-    color: var(--dark-text-color);
+    
 }
 
 
