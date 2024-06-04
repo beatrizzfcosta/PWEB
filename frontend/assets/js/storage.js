@@ -20,7 +20,7 @@ async function getData() {
         }
 
         const data = await response.json();
-        return data.part;
+        return data.data;
     } catch (error) {
         console.error('Error fetching components:', error);
     }

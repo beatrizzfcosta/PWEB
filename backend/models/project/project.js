@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const droneSchema = require('../drone/drone')
-const userSchema = require('../user/user')
+const Drone = require('../drone/drone')
+const User = require('../user/user')
 const projectSchema = new mongoose.Schema({
     drone: {
         type: Schema.Types.ObjectId,
-        ref: 'droneSchema',
+        ref: 'Drone',
         required: true
     },
     users: [{
         type: Schema.Types.ObjectId,
-        ref: 'userSchema',
+        ref: 'User',
         required: true
     }],
     finished:{
