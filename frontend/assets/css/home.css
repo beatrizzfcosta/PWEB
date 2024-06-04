@@ -1,13 +1,62 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+:root {
+    --tran-05: 0.5s; 
+    --body-color-dark: #242526; 
+    --light-text-color: #3a3b3c; 
+    --light-bg-color: #f0f0f0; 
+    --dark-text-color: #ccc; 
+    --dark-bg-color: #3a3b3c; 
+    --input-bg-color-light: #9fb3c8;
+    --input-text-color-light: #707070; 
+    --input-bg-color-dark: #3a3b3c; 
+    --input-text-color-dark: #ffffff; 
 }
 
-h1 {
-    text-align: center;
-    margin: 20px 0;
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: var(--dark-text-color); /* Define a cor de texto inicial */
+    transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
+}
+
+body.light {
+    background-color: var(--light-bg-color); /* Cor de fundo no modo claro */
+    color: var(--light-text-color);
+}
+
+body.dark {
+    background-color: var(--dark-bg-color); /* Cor de fundo no modo escuro */
+    color: var(--dark-text-color);
+}
+
+main {
+    margin-left: 80px;
+    padding: 20px;
+    height: 100vh; /* Para garantir que ocupe a altura total da viewport */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centraliza verticalmente */
+    position: relative;
+    z-index: 1;
+}
+
+.title-container {
+    position: absolute;
+    top: 20px; /* Posição no topo */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+body.dark .title-container h1 {
+    color: var(--dark-text-color);
+}
+
+body.light .title-container h1 {
+    color: var(--light-text-color);
 }
 
 .cards {
