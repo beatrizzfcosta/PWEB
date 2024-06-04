@@ -134,6 +134,7 @@ body.dark .category-btn {
     linear-gradient(var(--dark-bg-color) 0 0) padding-box, /* Gradient background */
     linear-gradient(to right, #c7d8e6, #51698c) border-box;
     color: var(--dark-text-color); /* Text color */
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
 }
 
 body.light .category-btn {
@@ -175,7 +176,11 @@ body.light .category-btn {
 }
 
 /* Estilos para o modal */
-.modal {
+body.light .modal {
+    border: 4px solid transparent;
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
     display: none;
     position: fixed;
     z-index: 9999;
@@ -184,16 +189,42 @@ body.light .category-btn {
     transform: translate(-50%, -50%);
     width: 300px; /* Tamanho da caixa quadrada */
     height: 300px; /* Tamanho da caixa quadrada */
-    background-color: #06347a;
+    background-color: var(--light-bg-color);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+}
+
+body.light .modal-content {
+    color: var(--light-text-color);
+    margin: 15% auto;
     padding: 20px;
     border-radius: 20px;
 }
 
-.modal-content {
-    color: white;
+body.dark .modal {
+    border: 4px solid transparent;
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; /* Tamanho da caixa quadrada */
+    height: 300px; /* Tamanho da caixa quadrada */
+    background-color: var(--dark-bg-color);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+}
+
+body.dark .modal-content {
+    color: var(--dark-text-color);
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
     border-radius: 20px;
 }
 
@@ -212,4 +243,21 @@ body.light .category-btn {
     color: #5490FF;
     text-decoration: none;
     cursor: pointer;
+}
+
+
+body.light .categories .category-btn .quadcopter {   
+     content: url('../img/quadcopter.png');
+}
+
+body.light .categories .category-btn .gear {   
+    content: url('../img/gear-2.png');
+}
+
+body.light .categories .category-btn .power {   
+    content: url('../img/power-2.png');
+}
+
+body.light .categories .category-btn .technology {   
+    content: url('../img/technology.png');
 }
