@@ -5,6 +5,7 @@ const Drone = require("../../models/drone/drone");
 router.get("/", async (req, res) => {
   try {
     const mostBuiltDrone = await Drone.findOne().sort({ quantity: -1 }).exec();
+
     if (mostBuiltDrone) {
       res.status(200).json(mostBuiltDrone);
     } else {
