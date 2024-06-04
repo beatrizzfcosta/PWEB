@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 const Drone = require('../drone/drone')
 const User = require('../user/user')
 const projectSchema = new mongoose.Schema({
+    name: {
+        type: string,
+        required: true
+    },
     drone: {
         type: Schema.Types.ObjectId,
         ref: 'Drone',
