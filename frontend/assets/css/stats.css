@@ -1,55 +1,145 @@
+:root {
+    --tran-05: 0.5s; 
+    --body-color-dark: #242526; 
+    --light-text-color: #3a3b3c; 
+    --light-bg-color: #f0f0f0; 
+    --dark-text-color: #ccc; 
+    --dark-bg-color: #3a3b3c; 
+    --input-bg-color-light: #9fb3c8;
+    --input-text-color-light: #707070; 
+    --input-bg-color-dark: #3a3b3c; 
+    --input-text-color-dark: #ffffff; 
+}
+
 body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    background-image: url('../img/main.jpg');
-    background-repeat: no-repeat;
-    color: white;
+    color: var(--dark-text-color); /* Define a cor de texto inicial */
+    transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
 }
+
+body.light {
+    background-color: var(--light-bg-color); /* Cor de fundo no modo claro */
+    color: var(--light-text-color);
+}
+
+body.dark {
+    background-color: var(--dark-bg-color); /* Cor de fundo no modo escuro */
+    color: var(--dark-text-color);
+}
+
 main {
     margin-left: 80px;
     padding: 20px;
-    overflow-y: auto;  /* Permite a rolagem vertical */
-    height: 100vh; 
+    overflow-y: auto;
+    position: relative;
+    z-index: 1; 
 }
 
 .title-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
-.title-container h1 {
-    color: white;
+body.dark .title-container h1 {
+    color: var(--dark-text-color);
 }
 
-.statistics-container {
+body.light .title-container h1 {
+    color: var(--light-text-color);
+}
+
+.carousel-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
+    height: 90vh; /* Opcional, apenas para garantir que o contêiner ocupe toda a altura da página */
 }
 
-canvas {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 45%;    /* Define um tamanho menor para os gráficos */
-    max-height: 300px; /* Define uma altura máxima para os gráficos */
-}
-
-.stats-summary {
+.carousel {
+    overflow: hidden;
+    max-width: 900px; /* Ajusta a largura da área do carrossel */
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
+    justify-content: center; /* Centraliza os elementos horizontalmente */
+    align-items: center; 
 }
 
-.stats-summary div {
-    font-size: 1.2em;
-    color: #5490FF;
+.carousel .carousel__item {
+    display: none;
+    background-color: var(--dark-bg-color); /* Fundo dos gráficos */
+    border-radius: 20px; /* Borda arredondada */
+    padding: 20px; /* Padding para o fundo dos gráficos */
+    box-sizing: border-box; /* Inclui o padding na largura total */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.light  .carousel .carousel__item {
+    background-color: var(--light-bg-color); 
+}
+
+.carousel .carousel__item--visible {
+    display: block;
+    animation: fadeVisibility 0.5s;
+}
+
+.carousel__button--next,
+.carousel__button--prev {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    color: white; /* Definindo a cor do texto para branco como padrão */
+}
+
+body.dark .carousel__button--next,
+body.dark .carousel__button--prev{
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /* Gradient background */
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color:var(--dark-text-color); / /* Text color */
+}
+
+body.light .carousel__button--next,
+body.light .carousel__button--prev
+{
+    background: 
+    linear-gradient(var(--light-bg-color) 0 0) padding-box, /* Gradient background */
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color:var(--light-text-color); /* Definindo a cor do texto para preto no modo light */
+}
+
+.carousel__button--prev {
+    margin-right: 10px; /* Espaçamento entre o botão e o gráfico */
+}
+
+.carousel__button--next {
+    margin-left: 10px; /* Espaçamento entre o botão e o gráfico */
+}
+
+.carousel__button--prev:hover, .carousel__button--next:hover {
+    transform: scale(1.05);
+}
+
+@keyframes fadeVisibility {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: opacity linear;
+    }
 }

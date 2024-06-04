@@ -1,22 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR" class="stats-body light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Lateral</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/home.css" />
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
 </head>
-
 <body>
     <div id="sidebar-container"></div>
-    <div class="content">
-        <h1>Conteúdo da Página</h1>
-        <p>Aqui está o conteúdo da página...</p>
-    </div>
-
+    <main>
+        <div class="title-container">
+            <h1>Profile</h1>
+        </div>
+        <div class="profile-container">
+            <!-- Caixa para foto de perfil -->
+            <div class="profile-picture-container">
+                <img src="../assets/img/profile.png" alt="Profile Picture" class="profile-picture">
+                <div>
+                    <input type="file" id="profile-image-upload">
+                    <button class="edit-picture-btn" onclick="editProfilePicture()"><i class='bx bx-edit'></i> Edit Profile Picture</button>
+                </div>
+            </div>
+            <div class="profile-info-container">
+                <!-- Caixa para dados do perfil a serem editados -->
+                <div class="profile-info">
+                    <p><strong>Username:</strong> <span id="username">johndoe</span></p>
+                    <p><strong>First Name:</strong> <span id="firstName">John</span></p>
+                    <p><strong>Last Name:</strong> <span id="lastName">Doe</span></p>
+                    <p><strong>Email:</strong> <span id="email">johndoe@gmail.com</span></p>
+                    <p><strong>Drones Made:</strong> <span id="dronesMade">10</span></p>
+                </div>
+                <div class="edit-btn-container">
+                    <button class="edit-btn" onclick="editProfile()"><i class='bx bx-edit'></i> Edit Profile</button>
+                </div>
+            </div>
+        </div>
+         <!-- Caixa para o gráfico de projetos por mês -->
+         <div class="project-chart">
+            <h2>Projects Made per Month</h2>
+            <canvas id="projectChart" width="700" height="200"></canvas>
+        </div>
+    </main>
+    <script src="../assets/js/profile.js"></script>
+    <script src="../assets/js/loadSidebar.js"></script>
 </body>
-<script src="../assets/js/loadSidebar.js"></script>
 </html>
-

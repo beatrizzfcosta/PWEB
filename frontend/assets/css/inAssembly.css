@@ -2,9 +2,12 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    background-image: url('../img/main.jpg');
-    background-repeat: no-repeat;
     color: white;
+    transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
+}
+
+body.dark {
+    background-color: var(--body-color-dark); /* Define a cor de fundo no modo dark */
 }
 
 main {
@@ -12,12 +15,16 @@ main {
     overflow-y: auto;  /* Permite a rolagem vertical */
     height: 100vh; 
     margin-right: 15px;
+    position: relative;
+    z-index: 1; 
+    margin-left: 100px;
 }
+
 .title-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .title-container h1 {
@@ -26,7 +33,7 @@ main {
 }
 
 .title-container button {
-    background-color: #5490FF;
+    background-color: #4c6488;
     border-style: none;
     border-radius: 20px;
     padding: 10px;
@@ -46,7 +53,7 @@ button {
 }
 
 button:hover {
-    background-color:#5490FF;
+    background-color:#4c6488;
 }
 
 
@@ -61,6 +68,7 @@ button:hover{
     border: 1px solid #06347a;
     border-radius: 5px;
     margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 .accordion-item {
@@ -79,6 +87,11 @@ button:hover{
 .accordion-content {
     padding: 10px;
     display: none;
+
+}
+
+h2{
+    margin-left: 20px;
 }
 
 .status-icon {
@@ -87,10 +100,11 @@ button:hover{
 
 .progress-bar {
     height: 20px;
-    background-color: #5490FF;
+    background-color: #4c6488;
     border-radius: 5px;
     overflow: hidden;
     margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 .progress-bar-inner {

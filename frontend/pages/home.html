@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" class="stats-body light">
 
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,8 @@
     <title>Home - Drone Management Platform</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/home.css" />
+    <script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
+
 </head>
 
 <body>
@@ -16,29 +18,29 @@
         <section class="cards">
             <div class="card">
                 <h2>Drones em Montagem</h2>
-                <!-- Drones em montagem serão inseridos aqui -->
+                <div id="progress-container-1"></div>
+                <div id="progress-container-2"></div>
             </div>
             <div class="card">
                 <h2>Drones Montados</h2>
-                <ul>
+                <ul class="list" id="drones-montados-list">
                     <!-- Drones montados serão inseridos aqui -->
                 </ul>
             </div>
             <div class="card">
                 <h2>Componentes com Baixa Disponibilidade</h2>
-                <ul>
+                <ul class="list" id="componentes-baixa-disponibilidade-list">
                     <!-- Componentes com baixa disponibilidade serão inseridos aqui -->
                 </ul>
             </div>
             <div class="card">
                 <h2>Drones com Menor Disponibilidade</h2>
-                <ul>
+                <ul class="list" id="drones-menor-disponibilidade-list">
                     <!-- Drones com menor disponibilidade serão inseridos aqui -->
                 </ul>
             </div>
         </section>
     </main>
-    <script src="../assets/js/loadSidebar.js"></script>
     <script src="../assets/js/home.js"></script>
 </body>
 

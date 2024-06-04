@@ -2,18 +2,22 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    background-image: url('../img/main.jpg');
-    background-repeat: no-repeat;
     color: white;
+    transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
 }
 
-main {
-    margin-left: 80px;
+body.dark {
+    background-color: var(--body-color-dark); /* Define a cor de fundo no modo dark */
+}
+
+main{
     padding: 20px;
-    overflow-y: auto;
+    overflow-y: auto;  /* Permite a rolagem vertical */
     height: 100vh; 
+    position: relative;
+    z-index: 1; 
+    margin-left: 100px;
 }
-
 .title-container {
     display: flex;
     justify-content: center;
