@@ -314,7 +314,7 @@ function loadSidebar() {
                     </div>
                     <div class="bottom-content">
                         <li>
-                            <a href="#">
+                            <a href="signIN.html">
                                 <i class='bx bx-log-out icon'></i>
                                 <span class="text nav-text">Logout</span>
                             </a>

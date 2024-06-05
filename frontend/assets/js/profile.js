@@ -1,4 +1,60 @@
 let profilePictureChanged = false;
+
+
+async function getUser() {
+    try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            throw new Error('Token not found in local storage');
+        }
+
+        const response = await fetch('http://localhost:15000/user', {
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch components');
+        }
+
+        const data = await response.json();
+
+        return data.data;
+    } catch (error) {
+        console.error('Error fetching components:', error);
+    }
+}
+async function fetchUser() {
+    try {
+        const user = await getUser();
+        if (user) {
+             showUserDetails(user);
+        }
+    } catch (error) {
+        console.error('Error fetching components:', error);
+    }
+}
+ function showUserDetails(user) {
+
+        const usernameElement = document.getElementById("username");
+        const firstNameElement = document.getElementById("firstName");
+        const lastNameElement = document.getElementById("lastName");
+        const emailElement = document.getElementById("email");
+        const dronesMadeElement = document.getElementById("dronesMade");
+
+
+        usernameElement.textContent = user.username;
+        firstNameElement.textContent = user.firstName;
+        lastNameElement.textContent = user.lastName;
+        emailElement.textContent = user.email;
+        dronesMadeElement.textContent = "10";
+
+}
+
 function editProfilePicture() {
     // Seleciona o input de arquivo
     const input = document.getElementById('profile-image-upload');
@@ -84,6 +140,7 @@ function saveProfile() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
+    fetchUser();
     const ctx = document.getElementById('projectChart').getContext('2d');
     const projectChart = new Chart(ctx, {
         type: 'line', // Altera o tipo de gráfico para linha

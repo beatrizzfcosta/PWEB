@@ -1,3 +1,5 @@
+
+
 const User = require("../../models/user/user");
 
 async function checkEmail(email) {
@@ -18,6 +20,20 @@ async function checkUsername(username) {
     console.error("Error checking username:", error);
     throw error;
   }
-}
+} function extractUserIdFromToken(token) {
 
-module.exports = {checkEmail, checkUsername};
+  if (!token) {
+    return null;
+  }
+
+  try {
+    const [, payloadBase64] = token.split('.');
+    const payloadJson = atob(payloadBase64);
+    const payload = JSON.parse(payloadJson);
+    return payload.usrName;
+  } catch (error) {
+    console.error('Error extracting user ID from token:', error);
+    return null;
+  }
+}
+module.exports = {checkEmail, checkUsername,extractUserIdFromToken};
