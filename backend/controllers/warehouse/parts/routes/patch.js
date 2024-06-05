@@ -16,35 +16,45 @@ router.patch("/", async (req, res) => {
       });
     }
 
-    const part = await Part.findOne({ name: name });
+    await Part.findOne({ name: name })
+        .then(async (part)=>{
+          if (!part) {
+            return res.status(404).json({
+              status: "fail",
+              message: "Part doesn't exist",
+            });
+          }
 
-    if (!part) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Part doesn't exist",
-      });
-    }
+          const updatedQuantity = part.quantity - quantityUsed;
 
-    const updatedQuantity = part.quantity - quantityUsed;
+          if (updatedQuantity < 0) {
+            return res.status(400).json({
+              status: 'fail',
+              message: 'Quantity cannot be negative',
+            });
+          }
 
-    if (updatedQuantity < 0) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'Quantity cannot be negative',
-      });
-    }
+          await Part.updateOne(
+              { name: name },
+              { $set: { quantity: updatedQuantity } }
+          )
+              .then(()=>{
+                return res.json({
+                  status: "success",
+                  message: "Part updated successfully",
+                  updatedQuantity: updatedQuantity,
+                });
+              })
+              .catch((error)=>{
+                console.error(error);
+              })
 
-    await Part.updateOne(
-        { name: name },
-        { $set: { quantity: updatedQuantity } }
-    );
 
-    return res.json({
-      status: "success",
-      message: "Part updated successfully",
-      updatedQuantity: updatedQuantity,
-    });
 
+        })
+        .catch((error)=>{
+          console.error(error);
+        })
 
   } catch (error) {
     return res.json({

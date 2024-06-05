@@ -103,7 +103,7 @@ function saveProfilePicture() {
 
 
 function editProfile() {
-    const fields = ['username', 'firstName', 'lastName', 'email', 'dronesMade'];
+    const fields = ['username', 'firstName', 'lastName', 'email'];
     fields.forEach(field => {
         let element = document.getElementById(field);
         let currentValue = element.innerText;
@@ -120,8 +120,9 @@ function editProfile() {
 }
 
 
-function saveProfile() {
-    const fields = ['username', 'firstName', 'lastName', 'email', 'dronesMade'];
+async function saveProfile() {
+    const fields = ['username', 'firstName', 'lastName', 'email'];
+    const newData = {};
     fields.forEach(field => {
         let input = document.getElementById(`input-${field}`);
         let newValue = input.value;
@@ -129,14 +130,35 @@ function saveProfile() {
         span.id = field;
         span.innerText = newValue;
         input.parentNode.replaceChild(span, input);
+        newData[field] = newValue; // Store the updated field value
     });
 
-    let editButton = document.querySelector('.edit-btn');
-    editButton.innerHTML = "<i class='bx bx-edit'></i> Edit Profile";
-    editButton.onclick = editProfile; // Definido para voltar ao estado de edição
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('Token not found in local storage');
+        }
 
-    // Remova esta linha caso não deseje exibir uma mensagem de sucesso
-    alert('Profile saved successfully!');
+        const response = await fetch('http://localhost:15000/user', {
+            method: 'PATCH',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newData) // Send the updated data to the server
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to save profile');
+        }
+
+        // Remova esta linha caso não deseje exibir uma mensagem de sucesso
+        alert('Profile saved successfully!');
+
+    } catch (error) {
+        console.error('Error saving profile:', error);
+        // Provide error feedback to the user if necessary
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
