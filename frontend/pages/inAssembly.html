@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AssemblyNG Drone</title>
     <link rel="stylesheet" href="caminho/para/basis-ui.css">
-    <script src="caminho/para/basis-ui.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
     <link rel="stylesheet" href="../assets/css/inAssembly.css" />
 </head>
 <body>
@@ -17,17 +16,15 @@
             <h1>In Assembly Drones</h1>
             <button class="addDroneBtn" id="addDroneBtn" onclick="openModal()"><i class="fas fa-plus"></i></button>
         </div>
-        <div id="dronesContainer">
-            <!-- New drone projects will be added here dynamically -->
-        </div>
+        <div id="dronesContainer"></div>
     </main>
-
-    <!-- Modal for drone assembly -->
     <div id="overlay" class="overlay"></div>
-    <button class="prev" onclick="prevStep()">&laquo;</button>
+    
     <div id="droneModal" class="modal">
+        
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
+            <button class="prev" onclick="prevStep()">&laquo;</button>
             <div class="carousel">
                 <div class="carousel-item" id="step1">
                     <h2>Step 1: Choose Drone Model</h2>
@@ -68,7 +65,6 @@
             <button class="next" onclick="nextStep()">&raquo;</button>
         </div>
     </div>
-
     <script src="../assets/js/inAssembly.js"></script>
     <script src="../assets/js/loadSidebar.js"></script>
 </body>

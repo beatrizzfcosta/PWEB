@@ -31,10 +31,16 @@
         transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
     }
 
-    body.dark {
-        background-color: var(--body-color-dark); /* Define a cor de fundo no modo dark */
+    body.light {
+        background-color: var(--light-bg-color); /* Cor de fundo no modo claro */
+        color: var(--light-text-color);
     }
-
+    
+    body.dark {
+        background-color: var(--dark-bg-color); /* Cor de fundo no modo escuro */
+        color: var(--dark-text-color);
+    }
+    
     main {
         margin-left: 80px;
         overflow-y: auto;  /* Permite a rolagem vertical */
@@ -50,39 +56,29 @@
         justify-content: center;
         align-items: center;
         margin-top: 20px;
+        top: 20px; /* Posição no topo */
+        width: 100%;
     }
-
-    .title-container h1 {
+    body.dark .title-container h1 {
         margin-right: 10px;
-        color: white;
+        color: var(--dark-text-color);
+    }
+    
+    body.light .title-container h1 {
+        margin-right: 10px;
+        color: var(--light-text-color);
     }
 
     .title-container button {
         background-color: #4c6488;
-    
         border-radius: 20px;
         padding: 10px;
         width: 40px;
         font-size: 15px;
     }
 
-    .models, .parts, .availability {
-        margin-bottom: 20px;
-    }
-
-
-    h2{
-        margin-left: 20px;
-    }
-
-    .status-icon {
-        font-size: 1.2em;
-    }
-
-
     body.light .drone-card {
         background-color: var(--light-bg-color  );
-    
         border-radius: 20px;
         padding: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -99,29 +95,9 @@
         color: var(--dark-text-color);
     }
 
-
-    .progress-bar {
-        width: 100%;
-        background-color: #f3f3f3;
-        border-radius: 5px;
-        overflow: hidden;
-        margin: 10px 0;
-    }
-
-    .progress-bar-fill {
-        height: 20px;
-        background-color: #4caf50;
-        text-align: center;
-        color: white;
-        line-height: 20px;
-        border-radius: 5px;
-    }
-
-
     #dronesContainer {
         padding: 20px;
     }
-
 
     body.light .modal {
         border: 4px solid transparent;
@@ -145,10 +121,11 @@
     body.light .modal-content {
         color: var(--light-text-color);
         margin: 15% auto;
-        padding: 20px;
         border-radius: 20px;
         position: relative; /* Adiciona posição relativa para alinhar os elementos internos */
-        width: 80%; /* Ajusta a largura do modal */
+        width: 100%; /* Ajusta a largura do modal */
+        align-items: center;
+        justify-content: center;
     }
 
     /* Estilos para o modal */
@@ -213,23 +190,15 @@
     .carousel {
         display: flex;
         overflow: hidden;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%; 
     }
 
     .carousel-item {
         min-width: 100%;
         transition: transform 0.5s ease;
     }
-
-    .carousel-controls {
-        display: flex;
-        justify-content: space-between;
-    
-        position: absolute; /* Define a posição absoluta para os controles */
-    
-        width: calc(100% - 40px); /* Ajusta a largura dos controles */
-        left: 20px; /* Ajusta a posição horizontal */
-    }
-
 
 
     .resume-btn, .addDroneBtn, .save-button {
@@ -251,7 +220,6 @@
 
     body.dark .resume-btn,
     body.dark .addDroneBtn,
-    body.dark .addDroneBtn,
     body.dark .save-button {
         background: 
         linear-gradient(var(--dark-bg-color) 0 0) padding-box, /* Gradient background */
@@ -267,14 +235,12 @@
         linear-gradient(to right, #c7d8e6, #51698c) border-box;
         color:var(--light-text-color); /* Definindo a cor do texto para preto no modo light */
     }
+
     .addDroneBtn:hover.save-button:hover {
         transform: scale(1.1);
     }
 
     .prev, .next {
-        position: absolute; /* Define a posição absoluta para os botões */
-        top: 50%; /* Posiciona os botões no meio verticalmente */
-        transform: translateY(-50%); /* Centraliza verticalmente */
         width: 50px; /* Define a largura dos botões */
         height: 50px; /* Define a altura dos botões */
         border: 4px solid transparent;
@@ -285,6 +251,17 @@
         color: white; /* Define a cor do texto */
         font-size: 20px; /* Define o tamanho da fonte */
         cursor: pointer; /* Define o cursor como ponteiro */
-
+        top: 50%; /* Alinha o botão "prev" verticalmente */
+        transform: translateY(-50%); /* Centraliza verticalmente */
+    
     }
 
+    .prev {
+ 
+        left: 10px; /* Posiciona o botão "prev" à esquerda */
+    }
+    
+    .next {
+
+        right: 70px; /* Posiciona o botão "next" à direita */
+    }

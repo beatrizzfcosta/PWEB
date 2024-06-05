@@ -11,6 +11,7 @@
     --input-text-color-dark: #ffffff; 
 }
 
+
 /* Overlay */
 .overlay {
     position: fixed; 
@@ -28,27 +29,39 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    color: var(--dark-text-color); /* Define a cor de texto inicial */
+    color: white;
     transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
 }
 
-body.light {
-    background-color: var(--light-bg-color); /* Cor de fundo no modo claro */
-    color: var(--light-text-color);
+body.dark {
+    background-color: var(--body-color-dark); /* Define a cor de fundo no modo dark */
 }
 
-body.dark {
-    background-color: var(--dark-bg-color); /* Cor de fundo no modo escuro */
+body.light {
+    background-color: var(--light-bg-color); /* Define a cor de fundo no modo light */
+    color: var(--light-text-color); /* Define a cor do texto no modo light */
+}
+
+main {
+    padding: 20px;
+    overflow-y: auto;  /* Permite a rolagem vertical */
+    height: 100vh; 
+    position: relative;
+    z-index: 1; 
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body.dark .title-container h1 {
     color: var(--dark-text-color);
 }
 
-
-main {
-    margin-left: 80px;
-    padding: 20px;
-    overflow-y: auto;
-    position: relative;
-    z-index: 1; 
+body.light .title-container h1 {
+    color: var(--light-text-color);
 }
 
 .search-bar {

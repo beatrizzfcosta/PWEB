@@ -47,6 +47,7 @@ function nextStep() {
         currentStep++;
         updateCarousel();
         unsavedChanges = true;
+        updateProgressBar();
     }
 }
 
@@ -55,6 +56,7 @@ function prevStep() {
         currentStep--;
         updateCarousel();
         unsavedChanges = true;
+        updateProgressBar();
     }
 }
 
@@ -131,18 +133,63 @@ function addDroneCard(drone) {
     droneCard.className = 'drone-card';
     droneCard.setAttribute('data-id', drone.id);
 
-    const progress = calculateProgress(drone);
+    const progressContainer = document.createElement('div');
+    progressContainer.id = `progressContainer-${drone.id}`;
+    progressContainer.className = 'progress-bar-container';
 
     droneCard.innerHTML = `
         <h3>${drone.model}</h3>
-        <div class="progress-bar">
-            <div class="progress-bar-fill" style="width: ${progress}%;">${progress}%</div>
-        </div>
+        <div id="progressContainer-${drone.id}" class="progress-bar-container"></div>
         <button class="resume-btn" onclick="resumeAssembly(${drone.id})">Resume</button>
     `;
 
     dronesContainer.appendChild(droneCard);
+
+    // Initialize the progress bar
+    const progressBar = new ProgressBar.Line(`#progressContainer-${drone.id}`, {
+        strokeWidth: 2, // Adjust the thickness of the line here
+        easing: 'easeInOut',
+        duration: 1400, 
+        color: '#FFEA82',
+        trailColor: '#3a3b3c',
+        trailWidth: 1,
+        svgStyle: { width: '100%', height: '100%' },
+        text: {
+            style: {
+                color: '#3a3b3c',
+                position: 'absolute',
+               
+                right: '50px',
+                padding: 0,
+                margin: 0,
+                transform: null
+            },
+            autoStyleContainer: false
+        },
+        from: { color: '#FFEA82' },
+        to: { color: '#ED6A5A' },
+        step: (state, bar) => {
+            bar.setText(Math.round(bar.value() * 100) + ' %');
+        }
+    });
+
+    const progress = calculateProgress(drone);
+    progressBar.animate(progress / 100); // Animate to the current progress
+
+    drone.progressBar = progressBar; // Save the progress bar instance to update later
 }
+
+function updateProgressBar() {
+    if (droneData.id) {
+        const droneCard = document.querySelector(`.drone-card[data-id='${droneData.id}']`);
+        if (droneCard) {
+            const progress = calculateProgress(droneData);
+            const progressBar = droneData.progressBar;
+            progressBar.animate(progress / 100); // Update the progress bar animation
+        }
+    }
+}
+
 
 function calculateProgress(drone) {
     let completedSteps = 0;
@@ -155,19 +202,29 @@ function calculateProgress(drone) {
 
 function resumeAssembly(id) {
     droneData = drones.find(drone => drone.id === id);
+    currentStep = calculateCurrentStep(droneData);
     openModal();
+}
+
+function calculateCurrentStep(drone) {
+    if (!drone.model) return 0;
+    if (Object.keys(drone.components).length === 0) return 1;
+    if (Object.keys(drone.tests).length === 0) return 2;
+    if (!drone.name || !drone.difficulty) return 3;
+    return 4;  // All steps completed
 }
 
 function updateDroneCard() {
     const droneCard = document.querySelector(`.drone-card[data-id='${droneData.id}']`);
     if (droneCard) {
         const progress = calculateProgress(droneData);
-        droneCard.querySelector('.progress-bar-fill').style.width = `${progress}%`;
-        droneCard.querySelector('.progress-bar-fill').innerText = `${progress}%`;
+        const progressBar = droneCard.progressBar;
+        progressBar.animate(progress / 100);  // Update the progress bar animation
     } else {
         addDroneCard(droneData);
     }
 }
+
 
 function updateModal() {
     if (droneData.model) {
@@ -191,6 +248,8 @@ function updateModal() {
     if (droneData.difficulty) {
         document.getElementById('assemblyDifficulty').value = droneData.difficulty;
     }
+
+    updateProgressBar();  // Update the progress bar in the modal
 }
 
 document.addEventListener('DOMContentLoaded', () => {
