@@ -145,7 +145,7 @@ function openModal(component) {
     const modalCategory = document.getElementById("modalCategory");
     const modalDate = document.getElementById("modalDate");
     const modalQuantity = document.getElementById("modalQuantity");
-
+console.log(modalCategory)
     if (!modal || !modalTitle || !modalCategory || !modalDate || !modalQuantity) {
         console.log("Elemento do modal não encontrado");
         return;

@@ -47,16 +47,12 @@ function showModels(filteredModels) {
             <p>${model.model}</p>
         `;
         modelElement.addEventListener("click", function() {
+            console.log(model);
             openModal(model);
+
         });
         modelGrid.appendChild(modelElement);
     });
-}
-
-// Função para exibir todos os modelos
-async function showAllModels() {
-    const components = await getDrones();
-    showModels(components);
 }
 
 // Função para exibir modelos filtrados por termo de pesquisa
@@ -100,11 +96,6 @@ function closeModal() {
     const modal = document.getElementById("modelModal");
     const overlay = document.getElementById("overlay");
 
-    // Remove all child elements from the modal
-    while (modal.firstChild) {
-        modal.removeChild(modal.firstChild);
-    }
-
     modal.style.display = "none";
     overlay.style.display = "none";
 }
@@ -115,29 +106,33 @@ function openModal(model) {
 
     const modal = document.getElementById("modelModal");
     const overlay = document.getElementById("overlay");
-    const modalTitle = document.getElementById("modalTitle");
+    const modalManufacturer = document.getElementById("modalManufacturer");
     const modalCategory = document.getElementById("modalCategory");
-    const modalDate = document.getElementById("modalDate");
     const modalQuantity = document.getElementById("modalQuantity");
 
-
-
+    if (!modalManufacturer|| !modalCategory || !modalQuantity ) {
+        console.log("Elemento do modal não encontrado");
+        return;
+    }
+    modalManufacturer.textContent = ""; // Limpa o conteúdo do fabricante
+    modalCategory.innerHTML = ""; // Limpa o conteúdo da categoria
     model.compatibleType.forEach(drone => {
-        // Assuming each 'compatible' object has a 'drone' property
-
-        const modalCard = document.createElement('div');
-        modalCard.classList.add('drone-card');
-
-
-        const stepInfo = document.createElement('div');
-        stepInfo.classList.add('step-info');
+        const stepInfo = document.createElement('p');
         stepInfo.innerHTML = `<span>${drone.type}:</span> ${drone.amountNeeded}`;
-        modalCard.appendChild(stepInfo);
-        modal.appendChild(modalCard);
+        modalCategory.appendChild(stepInfo);
+        model.compatibleParts.forEach(result => {
+            if(result.type === drone.type){
+                const stepInfo = document.createElement('p');
+                stepInfo.innerHTML = `<span>${result.name}</span> `;
+                modalCategory.appendChild(stepInfo);
+            }
+        });
+
     });
 
+    modalManufacturer.textContent = model.manufacturer;
     modalQuantity.textContent = "Quantity: " + model.quantity;
-    console.log(model.compatibleType[0].type)
+
     modal.style.display = "block"; // Exibe o modal
     overlay.style.display = "block"; // Exibe o overlay
 }
