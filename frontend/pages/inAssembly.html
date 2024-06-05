@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" class="stats-body light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AssemblyNG Drone</title>
+    <link rel="stylesheet" href="caminho/para/basis-ui.css">
+    <script src="caminho/para/basis-ui.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/inAssembly.css" />
 </head>
@@ -12,13 +15,59 @@
     <main>
         <div class="title-container">
             <h1>In Assembly Drones</h1>
-            <button id="addDroneBtn" onclick="addNewDrone()"><i class="fas fa-plus"></i></button>
+            <button class="addDroneBtn" id="addDroneBtn" onclick="openModal()"><i class="fas fa-plus"></i></button>
         </div>
         <div id="dronesContainer">
             <!-- New drone projects will be added here dynamically -->
         </div>
-       
     </main>
+
+    <!-- Modal for drone assembly -->
+    <div id="overlay" class="overlay"></div>
+    <button class="prev" onclick="prevStep()">&laquo;</button>
+    <div id="droneModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div class="carousel">
+                <div class="carousel-item" id="step1">
+                    <h2>Step 1: Choose Drone Model</h2>
+                    <select id="droneModelSelect">
+                        <option value="" disabled selected>Select a model</option>
+                        <option value="droneA">Drone A</option>
+                        <option value="droneB">Drone B</option>
+                        <option value="droneC">Drone C</option>
+                    </select>
+                    <button class="save-button" onclick="saveProgress()">Save</button>
+                </div>
+                <div class="carousel-item" id="step2">
+                    <h2>Step 2: Choose Components</h2>
+                    <div id="componentsContainer">
+                        <!-- Components will be dynamically loaded here -->
+                    </div>
+                    <button class="save-button" onclick="saveProgress()">Save</button>
+                </div>
+                <div class="carousel-item" id="step3">
+                    <h2>Step 3: Test Checklist</h2>
+                    <ul>
+                        <li><input type="checkbox" id="test1"> Stability Test</li>
+                        <li><input type="checkbox" id="test2"> Battery Test</li>
+                        <li><input type="checkbox" id="test3"> Control Test</li>
+                        <li><input type="checkbox" id="test4"> Camera Test</li>
+                    </ul>
+                    <button class="save-button" onclick="saveProgress()">Save</button>
+                </div>
+                <div class="carousel-item" id="step4">
+                    <h2>Step 4: Finalize</h2>
+                    <label for="droneName">Drone Name:</label>
+                    <input type="text" id="droneName">
+                    <label for="assemblyDifficulty">Assembly Difficulty:</label>
+                    <textarea id="assemblyDifficulty" rows="4"></textarea>
+                    <button class="save-button" onclick="saveProgress()">Save</button>
+                </div>
+            </div>
+            <button class="next" onclick="nextStep()">&raquo;</button>
+        </div>
+    </div>
 
     <script src="../assets/js/inAssembly.js"></script>
     <script src="../assets/js/loadSidebar.js"></script>

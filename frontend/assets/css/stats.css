@@ -12,36 +12,43 @@
 }
 
 body {
-    overflow-y: auto; /* Permite rolagem vertical */
     margin: 0;
     overflow: hidden;
     font-family: Arial, sans-serif;
-    color: var(--dark-text-color); /* Define a cor de texto inicial */
-    transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
+    color: var(--dark-text-color); 
+    transition: background-color var(--tran-05);
 }
 
 body.light {
-    background-color: var(--light-bg-color); /* Cor de fundo no modo claro */
+    background-color: var(--light-bg-color);
     color: var(--light-text-color);
 }
 
 body.dark {
-    background-color: var(--dark-bg-color); /* Cor de fundo no modo escuro */
+    background-color: var(--dark-bg-color);
     color: var(--dark-text-color);
 }
 
 main {
     margin-left: 80px;
     padding: 20px;
-    overflow-y: auto;
+    height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    z-index: 1; 
+    z-index: 1;
 }
 
 .title-container {
+    position: absolute;
+    top: 20px; 
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 
 body.dark .title-container h1 {
@@ -54,7 +61,7 @@ body.light .title-container h1 {
 
 .charts-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
     gap: 20px;
     margin-top: 20px;
     justify-items: center;   
@@ -63,11 +70,11 @@ body.light .title-container h1 {
 body.dark .chart {
     background-color: var(--dark-bg-color);
     border-radius: 20px;
-    padding: 10px; /* Ajuste o preenchimento para reduzir o tamanho */
+    padding: 10px;
     box-sizing: border-box;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 500px; /* Reduzindo a largura do contêiner */
-    height: 300px;
+    width: 500px; 
+    height: 300px; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,17 +84,16 @@ body.dark .chart {
 body.light .chart {
     background-color: var(--light-bg-color);
     border-radius: 20px;
-    padding: 10px; /* Ajuste o preenchimento para reduzir o tamanho */
+    padding: 10px; 
     box-sizing: border-box;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 500px; /* Reduzindo a largura do contêiner */
-    height: 300px;
+    width: 500px; 
+    height: 300px; 
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--light-text-color)
 }
-
 
 .chart .carousel__content {
     text-align: center;

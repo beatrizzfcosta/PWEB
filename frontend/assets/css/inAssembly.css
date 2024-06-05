@@ -1,115 +1,290 @@
-body {
-    margin: 0;
-    overflow: hidden;
-    font-family: Arial, sans-serif;
-    color: white;
-    transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
-}
+    :root {
+        --tran-05: 0.5s; 
+        --body-color-dark: #242526; 
+        --light-text-color: #3a3b3c; 
+        --light-bg-color: #f0f0f0; 
+        --dark-text-color: #ccc; 
+        --dark-bg-color: #3a3b3c; 
+        --input-bg-color-light: #9fb3c8;
+        --input-text-color-light: #707070; 
+        --input-bg-color-dark: #3a3b3c; 
+        --input-text-color-dark: #ffffff; 
+    }
+    /* Overlay */
+    .overlay {
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%; 
+        background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+        z-index: 9998; /* Abaixo do modal, mas acima de outros elementos */
+        display: none; /* Escondido por padrão */
+        transition: opacity 0.3s ease;
+    }
 
-body.dark {
-    background-color: var(--body-color-dark); /* Define a cor de fundo no modo dark */
-}
+    body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        color: white;
+        transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
+    }
 
-main {
-    margin-left: 80px;
-    overflow-y: auto;  /* Permite a rolagem vertical */
-    height: 100vh; 
-    margin-right: 15px;
-    position: relative;
-    z-index: 1; 
-    margin-left: 100px;
-}
+    body.dark {
+        background-color: var(--body-color-dark); /* Define a cor de fundo no modo dark */
+    }
 
-.title-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-}
+    main {
+        margin-left: 80px;
+        overflow-y: auto;  /* Permite a rolagem vertical */
+        height: 100vh; 
+        margin-right: 15px;
+        position: relative;
+        z-index: 1; 
+        margin-left: 100px;
+    }
 
-.title-container h1 {
-    margin-right: 10px;
-    color: white;
-}
+    .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
 
-.title-container button {
-    background-color: #4c6488;
-    border-style: none;
-    border-radius: 20px;
-    padding: 10px;
-    width: 40px;
-    font-size: 15px;
-}
-button {
-    padding: 15px;
-    border-radius: 30px;
-    border: none;
-    background-color:#06347a;
-    color: #fff;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-    box-sizing: border-box;
-}
+    .title-container h1 {
+        margin-right: 10px;
+        color: white;
+    }
 
-button:hover {
-    background-color:#4c6488;
-}
+    .title-container button {
+        background-color: #4c6488;
+    
+        border-radius: 20px;
+        padding: 10px;
+        width: 40px;
+        font-size: 15px;
+    }
+
+    .models, .parts, .availability {
+        margin-bottom: 20px;
+    }
 
 
-button:hover{
-    background-color: #06347a;
-}
-.models, .parts, .availability {
-    margin-bottom: 20px;
-}
+    h2{
+        margin-left: 20px;
+    }
 
-.accordion {
-    border: 1px solid #06347a;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
+    .status-icon {
+        font-size: 1.2em;
+    }
 
-.accordion-item {
-    border-bottom: 1px solid #06347a;
-}
 
-.accordion-header {
-    background-color: #06347a;
-    padding: 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    body.light .drone-card {
+        background-color: var(--light-bg-color  );
+    
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        color: var(--light-text-color);
+    }
 
-.accordion-content {
-    padding: 10px;
-    display: none;
+    body.dark .drone-card {
+        background-color: var(--dark-bg-color);
+        border-radius: 20px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        color: var(--dark-text-color);
+    }
 
-}
 
-h2{
-    margin-left: 20px;
-}
+    .progress-bar {
+        width: 100%;
+        background-color: #f3f3f3;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
 
-.status-icon {
-    font-size: 1.2em;
-}
+    .progress-bar-fill {
+        height: 20px;
+        background-color: #4caf50;
+        text-align: center;
+        color: white;
+        line-height: 20px;
+        border-radius: 5px;
+    }
 
-.progress-bar {
-    height: 20px;
-    background-color: #4c6488;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
 
-.progress-bar-inner {
-    height: 100%;
-    background-color: green;
-    width: 0%;
-    transition: width 0.3s;
-}
+    #dronesContainer {
+        padding: 20px;
+    }
+
+
+    body.light .modal {
+        border: 4px solid transparent;
+        background: 
+        linear-gradient(var(--light-bg-color) 0 0) padding-box, /*this is your grey background*/
+        linear-gradient(to right, #c7d8e6, #51698c) border-box;
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px; /* Tamanho da caixa quadrada */
+        height: 400px; /* Tamanho da caixa quadrada */
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+
+    }
+
+    body.light .modal-content {
+        color: var(--light-text-color);
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative; /* Adiciona posição relativa para alinhar os elementos internos */
+        width: 80%; /* Ajusta a largura do modal */
+    }
+
+    /* Estilos para o modal */
+    body.dark .modal {
+        border: 4px solid transparent;
+        background: 
+        linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
+        linear-gradient(to right, #c7d8e6, #51698c) border-box;
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px; /* Tamanho da caixa quadrada */
+        height: 400px; /* Tamanho da caixa quadrada */
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 20px 20px rgba(0, 0, 0, 0.5);
+
+    }
+
+    body.dark .modal-content {
+        color: var(--dark-text-color);
+        margin: 15% auto;
+        padding: 20px;
+        border-radius: 20px;
+        position: relative; /* Adiciona posição relativa para alinhar os elementos internos */
+        width: 80%; /* Ajusta a largura do modal */
+    }
+
+    body.light .close {
+        position: absolute;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        font-size: 28px;
+        color: var(--light-text-color);
+    }
+
+    body.dark .close {
+        position: absolute;
+        right: 10px;
+        font-size: 20px;
+        cursor: pointer;
+        font-size: 28px;
+        color: var(--dark-text-color);
+    }
+
+    body.light .close:hover{
+        color:  #51698c;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    body.dark .close:hover {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .carousel {
+        display: flex;
+        overflow: hidden;
+    }
+
+    .carousel-item {
+        min-width: 100%;
+        transition: transform 0.5s ease;
+    }
+
+    .carousel-controls {
+        display: flex;
+        justify-content: space-between;
+    
+        position: absolute; /* Define a posição absoluta para os controles */
+    
+        width: calc(100% - 40px); /* Ajusta a largura dos controles */
+        left: 20px; /* Ajusta a posição horizontal */
+    }
+
+
+
+    .resume-btn, .addDroneBtn, .save-button {
+        border: 4px solid transparent;
+        background: 
+        linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
+        linear-gradient(to right, #c7d8e6, #51698c) border-box;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        color: white; /* Definindo a cor do texto para branco como padrão */
+    }
+
+    body.dark .resume-btn,
+    body.dark .addDroneBtn,
+    body.dark .addDroneBtn,
+    body.dark .save-button {
+        background: 
+        linear-gradient(var(--dark-bg-color) 0 0) padding-box, /* Gradient background */
+        linear-gradient(to right, #c7d8e6, #51698c) border-box;
+        color:var(--dark-text-color); / /* Text color */
+    }
+
+    body.light .resume-btn,
+    body.light .addDroneBtn,
+    body.light .save-button{
+        background: 
+        linear-gradient(var(--light-bg-color) 0 0) padding-box, /* Gradient background */
+        linear-gradient(to right, #c7d8e6, #51698c) border-box;
+        color:var(--light-text-color); /* Definindo a cor do texto para preto no modo light */
+    }
+    .addDroneBtn:hover.save-button:hover {
+        transform: scale(1.1);
+    }
+
+    .prev, .next {
+        position: absolute; /* Define a posição absoluta para os botões */
+        top: 50%; /* Posiciona os botões no meio verticalmente */
+        transform: translateY(-50%); /* Centraliza verticalmente */
+        width: 50px; /* Define a largura dos botões */
+        height: 50px; /* Define a altura dos botões */
+        border: 4px solid transparent;
+        background: 
+        linear-gradient(var(--light-bg-color) 0 0) padding-box, /*this is your grey background*/
+        linear-gradient(to right, #c7d8e6, #51698c) border-box;
+        border-radius: 20px;
+        color: white; /* Define a cor do texto */
+        font-size: 20px; /* Define o tamanho da fonte */
+        cursor: pointer; /* Define o cursor como ponteiro */
+
+    }
+
