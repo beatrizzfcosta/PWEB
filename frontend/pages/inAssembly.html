@@ -21,10 +21,10 @@
     <div id="overlay" class="overlay"></div>
     
     <div id="droneModal" class="modal">
-        
+        <button class="prev" onclick="prevStep()">&laquo;</button>
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-            <button class="prev" onclick="prevStep()">&laquo;</button>
+
             <div class="carousel">
                 <div class="carousel-item" id="step1">
                     <h2>Step 1: Choose Drone Model</h2>
@@ -62,8 +62,9 @@
                     <button class="save-button" onclick="saveProgress()">Save</button>
                 </div>
             </div>
-            <button class="next" onclick="nextStep()">&raquo;</button>
+
         </div>
+        <button class="next" onclick="nextStep()">&raquo;</button>
     </div>
     <script src="../assets/js/inAssembly.js"></script>
     <script src="../assets/js/loadSidebar.js"></script>
