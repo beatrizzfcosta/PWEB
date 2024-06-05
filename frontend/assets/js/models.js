@@ -47,7 +47,6 @@ function showModels(filteredModels) {
             <p>${model.model}</p>
         `;
         modelElement.addEventListener("click", function() {
-            console.log(model);
             openModal(model);
 
         });
