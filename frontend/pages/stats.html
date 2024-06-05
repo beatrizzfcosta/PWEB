@@ -11,34 +11,23 @@
     <div id="sidebar-container"></div>
     <main>
         <div class="title-container">
-          <h1>Analytics</h1>
+            <h1>Analytics</h1>
         </div>
-        <div class="carousel-container">
-            <div class="carousel">
-                <button data-js="carousel_button--prev" class="carousel__button carousel__button--prev" aria-label="Slide anterior">
-                    <span class="carousel__icon">◀</span>
-                </button>
-                <div data-js="carousel__item" class="carousel__item carousel__item--visible">
-                    <canvas id="chartPecasUsadassId" width="600" height="400"></canvas>
-                </div>
-                <div data-js="carousel__item" class="carousel__item">
-                    <canvas id="chartModelosEficientes" width="600" height="400"></canvas>
-                </div>
-                <div data-js="carousel__item" class="carousel__item">
-                    <canvas id="chartTempoMedio" width="600" height="400"></canvas>
-                </div>
-                <div data-js="carousel__item" class="carousel__item">
-                    <div class="carousel__content">
-                        <h2>Additional Information</h2>
-                        <p>This is a placeholder for additional content you want to display in the carousel.</p>
-                    </div>
-                </div>
-                <button data-js="carousel_button--next" class="carousel__button carousel__button--next" aria-label="Próximo slide">
-                    <span class="carousel__icon">▶</span>
-                </button>
+        <div class="charts-container">
+            <div class="chart">
+                <canvas id="chartPecasUsadassId" width="250" height="150"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="chartModelosEficientes" width="300" height="200"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="chartTempoMedio" width="300" height="200"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="additionalChart" width="300" height="200"></canvas>
             </div>
         </div>
-    </main>
+    </main>    
     <script src="../assets/js/loadSidebar.js"></script>
     <script src="../assets/js/stats.js"></script>
 </body>

@@ -133,7 +133,15 @@ document.addEventListener("DOMContentLoaded", function() {
 // Função para fechar o modal
 function closeModal() {
     const modal = document.getElementById("componentModal");
-    modal.style.display = "none";
+    const overlay = document.getElementById("overlay");
+
+    if (!modal || !overlay) {
+        console.log("Elemento do modal ou overlay não encontrado");
+        return;
+    }
+
+    modal.style.display = "none"; // Esconde o modal
+    overlay.style.display = "none"; // Esconde o overlay
 }
 
 // Função para abrir o modal com os dados do componente
@@ -141,6 +149,7 @@ function openModal(component) {
     closeModal(); // Fecha o modal antes de abrir um novo
 
     const modal = document.getElementById("componentModal");
+    const overlay = document.getElementById("overlay"); 
     const modalTitle = document.getElementById("modalTitle");
     const modalCategory = document.getElementById("modalCategory");
     const modalDate = document.getElementById("modalDate");
@@ -157,4 +166,5 @@ function openModal(component) {
     modalQuantity.textContent = "Quantity: " + component.quantity;
 
     modal.style.display = "block"; // Exibe o modal
+    overlay.style.display = "block"; // Exibe o overlay
 }

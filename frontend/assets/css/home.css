@@ -14,6 +14,7 @@
 body {
     margin: 0;
     overflow: hidden;
+    overflow-y: auto; /* Permite rolagem vertical */
     font-family: Arial, sans-serif;
     color: var(--dark-text-color); /* Define a cor de texto inicial */
     transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
@@ -60,23 +61,47 @@ body.light .title-container h1 {
 }
 
 .cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    justify-items: center;
 }
 
-.card {
-    background: #fff;
+body.light .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: 
+    linear-gradient(var(--light-bg-color) 0 0) padding-box;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 20px;
     padding: 20px;
-    width: 300px;
+    width: 500px;
+    height: 300px;
     box-sizing: border-box;
+    color: var(--light-text-color)
+}
+
+body.dark .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 500px;
+    height: 300px;
+    box-sizing: border-box;
+    color: var(--dark-text-color)
 }
 
 .card h2 {
     margin-top: 0;
+    text-align: center;
 }
 
 .progress-circle {

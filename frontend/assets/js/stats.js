@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const slides = document.querySelectorAll('[data-js="carousel__item"]');
-    const nextButton = document.querySelector('[data-js="carousel_button--next"]');
-    const prevButton = document.querySelector('[data-js="carousel_button--prev"]');
-    let currentSlideIndex = 0;
     const charts = [];
 
     const chartPecasUsadas = () => {
@@ -128,30 +124,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return chartTempoMedio();
         }
     };
-
-    const manipulateSlideClasses = (correctSlideIndex) => {
-        slides.forEach((slide, index) => {
-            if (index === correctSlideIndex) {
-                slide.classList.add('carousel__item--visible');
-                if (!charts[index]) {
-                    charts[index] = createChart(index);
-                }
-            } else {
-                slide.classList.remove('carousel__item--visible');
-            }
-        });
-    };
-
-    nextButton.addEventListener('click', () => {
-        currentSlideIndex = (currentSlideIndex === slides.length - 1) ? 0 : currentSlideIndex + 1;
-        manipulateSlideClasses(currentSlideIndex);
-    });
-
-    prevButton.addEventListener('click', () => {
-        currentSlideIndex = (currentSlideIndex === 0) ? slides.length - 1 : currentSlideIndex - 1;
-        manipulateSlideClasses(currentSlideIndex);
-    });
-
     // Inicializar o primeiro gráfico
+    charts.push(chartPecasUsadas());
+    charts.push(chartModelosEficientes());
+    charts.push(chartTempoMedio());
     charts.push(chartPecasUsadas());
 });
