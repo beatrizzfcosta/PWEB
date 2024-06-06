@@ -318,3 +318,8 @@ body.light .categories .category-btn .power {
 body.light .categories .category-btn .technology {   
     content: url('../img/technology.png');
 }
+
+#addComponentModal {
+    width: 400px; /* Ajuste a largura conforme necessário */
+    height: 400px; /* Ajuste a altura conforme necessário */
+}

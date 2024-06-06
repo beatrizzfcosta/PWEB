@@ -145,11 +145,11 @@ function closeModal() {
 }
 
 // Função para abrir o modal com os dados do componente
-function openModal(component) {
+function openModal2(component) {
     closeModal(); // Fecha o modal antes de abrir um novo
 
     const modal = document.getElementById("componentModal");
-    const overlay = document.getElementById("overlay"); 
+    const overlay = document.getElementById("overlay2"); 
     const modalTitle = document.getElementById("modalTitle");
     const modalCategory = document.getElementById("modalCategory");
     const modalDate = document.getElementById("modalDate");
@@ -171,7 +171,7 @@ console.log(modalCategory)
 
 function closeModal2() {
     const modal = document.getElementById("addComponentModal");
-    const overlay = document.getElementById("overlay");
+    const overlay = document.getElementById("overlay2");
 
     if (!modal || !overlay) {
         console.log("Elemento do modal ou overlay não encontrado");
@@ -182,31 +182,4 @@ function closeModal2() {
     overlay.style.display = "none"; // Esconde o overlay
 }
 
-function openModal2(component) {
-    closeModal2(); // Fecha o modal antes de abrir um novo
 
-    const modal = document.getElementById("addComponentModal");
-    const overlay = document.getElementById("overlay"); 
-    const modalTitle = document.getElementById("componentName");
-    const modalCategory = document.getElementById("componentCategory");
-    const modalDate = document.getElementById("componentDescription");
-    const modalQuantity = document.getElementById("componentQuantity");
-
-    if (!modal || !modalTitle || !modalCategory || !modalDate || !modalQuantity) {
-        console.log("Elemento do modal não encontrado");
-        return;
-    }
-
-    modalTitle.textContent = component.name || "";
-    modalCategory.textContent = "Category: " + (component.type || "");
-    modalDate.textContent = "Date: " + (component.date || "");
-    modalQuantity.textContent = "Quantity: " + (component.quantity || "");
-
-    modal.style.display = "block"; // Exibe o modal
-    overlay.style.display = "block"; // Exibe o overlay
-}
-
-function saveComponent() {
-    // Implemente a lógica para salvar o componente aqui
-    console.log("Componente salvo!");
-}
