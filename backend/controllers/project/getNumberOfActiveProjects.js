@@ -4,8 +4,9 @@ const Project = require("../../models/project/project");
 
 router.get("/activeProjectsCount", async (req, res) => {
   try {
-    const activeProjects = await Project.find({ finished: false }).exec();
-    const activeProjectsCount = activeProjects.length; 
+    const activeProjectsCount = await Project.countDocuments({
+      finished: false,
+    }).exec();
 
     res.status(200).json({ count: activeProjectsCount });
   } catch (error) {
