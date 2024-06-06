@@ -7,11 +7,11 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    drone: {
+    drone: [{
         type: Schema.Types.ObjectId,
         ref: 'Drone',
         required: true
-    },
+    }],
     users: [{
         type: Schema.Types.ObjectId,
         ref: 'User',

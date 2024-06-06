@@ -304,12 +304,6 @@ function loadSidebar() {
                                     <span class="text nav-text">Models</span>
                                 </a>
                             </li>
-                            <li class="nav-link">
-                                <a href="stats.html">
-                                    <i class='bx bx-bar-chart icon'></i>
-                                    <span class="text nav-text">Analytics</span>
-                                </a>
-                            </li>
                         </ul>
                     </div>
                     <div class="bottom-content">
