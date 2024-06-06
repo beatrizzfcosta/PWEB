@@ -245,9 +245,11 @@ body.light .modal {
 
 body.light .modal-content {
     color: var(--light-text-color);
-    margin: 15% auto;
     padding: 20px;
     border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 /* Estilos para o modal */
@@ -320,8 +322,8 @@ body.light .categories .category-btn .technology {
 }
 
 #addComponentModal {
-    width: 400px; /* Ajuste a largura conforme necessário */
-    height: 400px; /* Ajuste a altura conforme necessário */
+    width: 500px; /* Ajuste a largura conforme necessário */
+    height:500px; /* Ajuste a altura conforme necessário */
 }
 
 
@@ -337,7 +339,8 @@ body.light .categories .category-btn .technology {
         background:
         linear-gradient(var(--input-bg-color-dark) 0 0) padding-box,
         linear-gradient(to right, #c7d8e6, #51698c) border-box;
-        color:var(--dark-text-color)
+        color:var(--dark-text-color);
+        outline: none;
     }
     
 body.light  #addComponentModal input[type="text"],
@@ -352,9 +355,8 @@ body.light #addComponentModal textarea  {
 #addComponentModal button {
     border: 4px solid transparent;
     background: 
-    linear-gradient(#f0f0f0 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(var(--light-bg-color) 0 0) padding-box, /*this is your grey background*/
     linear-gradient(to right, #c7d8e6, #51698c) border-box;
-    width: calc(100% + 30px);
     border-radius: 30px;
     cursor: pointer;
     font-size: 16px;
@@ -364,10 +366,15 @@ body.light #addComponentModal textarea  {
     justify-content: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    color: #3a3b3c; 
+    color: var(--light-text-color); 
 }
-
-button:hover {
+body.dark #addComponentModal button {
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color: var(--dark-text-color); 
+}
+#addComponentModal button:hover {
     background: 
     linear-gradient(#f0f0f0 0 0) padding-box, /*this is your grey background*/
     linear-gradient(to left, #c7d8e6, #51698c) border-box; 

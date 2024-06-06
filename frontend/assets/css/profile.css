@@ -192,13 +192,13 @@ input[type="text"], input[type="file"] {
 
 /* Estilo para inputs no modo claro */
 body.light input[type="text"], body.light input[type="file"] {
-    background-color: var(--input-background-color-light);; /* Cor de fundo */
-    color: var(--input-text-color-light); /* Cor do texto */
+    background-color: var(--input-bg-color-light); /* Cor de fundo */
+    color: var(--light-bg-color); /* Cor do texto */
 }
 
 /* Estilo para inputs no modo escuro */
 body.dark input[type="text"], body.dark input[type="file"] {
-    background-color: var(--input-bg-color-dark); /* Cor de fundo */
+    background-color: var(--body-color-dark); /* Cor de fundo */
     color: var(--input-text-color-dark); /* Cor do texto */
 }
 
