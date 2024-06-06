@@ -3,12 +3,13 @@
 const express = require("express");
 const router = express.Router();
 const Project = require("../../../models/project/project");
+const Drone = require("../../../models/drone/drone");
 const User = require("../../../models/user/user");
+
 
 router.post("/", async (req, res) => {
   try {
     const { name, drone, users, finished } = req.body;
-    console.log(name +" ,"+ drone +" ,"+ users +" ,"+ finished)
 
     if (!name || !drone || !users ) {
       return res.status(400).json({
@@ -16,8 +17,8 @@ router.post("/", async (req, res) => {
         message: "Name, drone, users, and finished status are required fields.",
       });
     }
-    const droneIds = await Promise.all(drones.map(async (droneName) => {
-      const drone = await Drone.findOne({ name: droneName }); // Find drone by name instead of model
+    const droneIds = await Promise.all(drone.map(async (droneName) => {
+      const drone = await Drone.findOne({ model: droneName }); // Find drone by name instead of model
       if (!drone) {
         throw new Error(`Drone '${droneName}' not found`);
       }
@@ -33,7 +34,7 @@ router.post("/", async (req, res) => {
     }));
     const newProject = await Project.create({
       name: name,
-      drone: drone,
+      drone: droneIds,
       users: userIds,
       finished: finished,
     });

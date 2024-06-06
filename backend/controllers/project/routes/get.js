@@ -6,9 +6,11 @@ const Project = require("../../../models/project/project");
 
 router.get("/", async (req, res) => {
   try {
-    const name = req.query.name; 
 
-    const result = await Project.findOne({ name: name });
+
+    const result = await Project.find({finished:true})
+        .populate("drone")
+        .populate("users")
 
     if (!result) {
       return res.status(400).json({
@@ -18,7 +20,7 @@ router.get("/", async (req, res) => {
     } else {
       return res.json({
         status: "success",
-        message: "Project found",
+        message: "Sent all project",
         data: result,
       });
     }
