@@ -168,3 +168,45 @@ console.log(modalCategory)
     modal.style.display = "block"; // Exibe o modal
     overlay.style.display = "block"; // Exibe o overlay
 }
+
+function closeModal2() {
+    const modal = document.getElementById("addComponentModal");
+    const overlay = document.getElementById("overlay");
+
+    if (!modal || !overlay) {
+        console.log("Elemento do modal ou overlay não encontrado");
+        return;
+    }
+
+    modal.style.display = "none"; // Esconde o modal
+    overlay.style.display = "none"; // Esconde o overlay
+}
+
+function openModal2(component) {
+    closeModal2(); // Fecha o modal antes de abrir um novo
+
+    const modal = document.getElementById("addComponentModal");
+    const overlay = document.getElementById("overlay"); 
+    const modalTitle = document.getElementById("componentName");
+    const modalCategory = document.getElementById("componentCategory");
+    const modalDate = document.getElementById("componentDescription");
+    const modalQuantity = document.getElementById("componentQuantity");
+
+    if (!modal || !modalTitle || !modalCategory || !modalDate || !modalQuantity) {
+        console.log("Elemento do modal não encontrado");
+        return;
+    }
+
+    modalTitle.textContent = component.name || "";
+    modalCategory.textContent = "Category: " + (component.type || "");
+    modalDate.textContent = "Date: " + (component.date || "");
+    modalQuantity.textContent = "Quantity: " + (component.quantity || "");
+
+    modal.style.display = "block"; // Exibe o modal
+    overlay.style.display = "block"; // Exibe o overlay
+}
+
+function saveComponent() {
+    // Implemente a lógica para salvar o componente aqui
+    console.log("Componente salvo!");
+}
