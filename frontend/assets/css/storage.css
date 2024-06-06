@@ -323,3 +323,53 @@ body.light .categories .category-btn .technology {
     width: 400px; /* Ajuste a largura conforme necessário */
     height: 400px; /* Ajuste a altura conforme necessário */
 }
+
+
+
+#addComponentModal input[type="text"],
+#addComponentModal input[type="number"],
+#addComponentModal textarea {
+        padding: 0.5rem;
+        font-size: 1rem;
+        border-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        border: 4px solid transparent;
+        background:
+        linear-gradient(var(--input-bg-color-dark) 0 0) padding-box,
+        linear-gradient(to right, #c7d8e6, #51698c) border-box;
+        color:var(--dark-text-color)
+    }
+    
+body.light  #addComponentModal input[type="text"],
+body.light #addComponentModal input[type="number"],
+body.light #addComponentModal textarea  {
+    background:
+        linear-gradient(var(--input-bg-color-dark) 0 0) padding-box,
+        linear-gradient(to right, #c7d8e6, #51698c) border-box;
+
+    color:var(--light-text-color)
+}
+#addComponentModal button {
+    border: 4px solid transparent;
+    background: 
+    linear-gradient(#f0f0f0 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    width: calc(100% + 30px);
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    color: #3a3b3c; 
+}
+
+button:hover {
+    background: 
+    linear-gradient(#f0f0f0 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to left, #c7d8e6, #51698c) border-box; 
+}
+
