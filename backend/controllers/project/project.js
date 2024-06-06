@@ -6,9 +6,11 @@ const deleteProjRoutes = require("./routes/delete");
 const patchProjRoutes = require("./routes/patch");
 const getProjRoutes = require("./routes/get");
 const getNumberOfActiveProjects = require("./getNumberOfActiveProjects");
+const getNumberOfInactiveProjects = require("./getNumberOfInactiveProjects");
 const auth = require("../../middlewares/auth")
 
 router.use("/", auth, getNumberOfActiveProjects);
+router.use("/", auth, getNumberOfInactiveProjects);
 
 router.use("/", auth, postProjRoutes);
 router.use("/", auth, deleteProjRoutes);

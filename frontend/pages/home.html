@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/home.css" />
     <script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
 </head>
 
 <body>
@@ -18,20 +19,22 @@
         </div>
         <section class="cards">
             <div class="card">
-                <h2>Drones em Montagem</h2>
+                <h2>Projetos a decorrer</h2>
                 <div id="progress-container-1" class="progress-circle"></div>
             </div>
             <div class="card">
-                <h2>Drones Montados</h2>
+                <h2>Projectos finalizados</h2>
                 <div id="progress-container-2" class="progress-circle"></div>
             </div>
             <div class="card">
-                <h2>Componentes com Baixa Disponibilidade</h2>
-                <div id="progress-container-3" class="progress-circle"></div>
+                <div class="chart">
+                    <canvas id="chartPecasUsadassId" width="300" height="200"></canvas>
+                </div>
             </div>
             <div class="card">
-                <h2>Drones com Menor Disponibilidade</h2>
-                <div id="progress-container-4" class="progress-circle"></div>
+                <div class="chart">
+                    <canvas id="lineChartExample" width="300" height="200"></canvas>
+                </div>
             </div>
         </section>
     </main>
