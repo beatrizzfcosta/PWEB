@@ -1,284 +1,504 @@
-    :root {
-        --tran-05: 0.5s; 
-        --body-color-dark: #242526; 
-        --light-text-color: #3a3b3c; 
-        --light-bg-color: #f0f0f0; 
-        --dark-text-color: #ccc; 
-        --dark-bg-color: #3a3b3c; 
-        --input-bg-color-light: #9fb3c8;
-        --input-text-color-light: #707070; 
-        --input-bg-color-dark: #3a3b3c; 
-        --input-text-color-dark: #ffffff; 
-    }
-    /* Overlay */
-    .overlay {
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%; 
-        background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
-        z-index: 9998; /* Abaixo do modal, mas acima de outros elementos */
-        display: none; /* Escondido por padrão */
-        transition: opacity 0.3s ease;
-    }
+:root {
+    --tran-05: 0.5s; 
+    --body-color-dark: #242526; 
+    --light-text-color: #3a3b3c; 
+    --light-bg-color: #f0f0f0; 
+    --dark-text-color: #ccc; 
+    --dark-bg-color: #3a3b3c; 
+    --input-bg-color-light: #9fb3c8;
+    --input-text-color-light: #707070; 
+    --input-bg-color-dark: #3a3b3c; 
+    --input-text-color-dark: #ffffff; 
+}
 
-    body {
-        margin: 0;
-        overflow: hidden;
-        font-family: Arial, sans-serif;
-        color: white;
-        transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
-    }
+/* Overlay */
+.overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    z-index: 9998; /* Abaixo do modal, mas acima de outros elementos */
+    display: none; /* Escondido por padrão */
+    transition: opacity 0.3s ease;
+}
 
-    body.light {
-        background-color: var(--light-bg-color); /* Cor de fundo no modo claro */
-        color: var(--light-text-color);
-    }
-    
-    body.dark {
-        background-color: var(--dark-bg-color); /* Cor de fundo no modo escuro */
-        color: var(--dark-text-color);
-    }
-    
-    main {
-        margin-left: 80px;
-        overflow-y: auto;  /* Permite a rolagem vertical */
-        height: 100vh; 
-        margin-right: 15px;
-        position: relative;
-        z-index: 1; 
-        margin-left: 100px;
-    }
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+    transition: background-color var(--tran-05); /* Adiciona transição suave para a mudança de cor de fundo */
+}
 
-    .title-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        top: 20px; /* Posição no topo */
-        width: 100%;
-    }
-    body.dark .title-container h1 {
-        margin-right: 10px;
-        color: var(--dark-text-color);
-    }
-    
-    body.light .title-container h1 {
-        margin-right: 10px;
-        color: var(--light-text-color);
-    }
+body.light {
+    background-color: var(--light-bg-color); /* Cor de fundo no modo claro */
+    color: var(--light-text-color);
+}
 
-    .title-container button {
-        background-color: #4c6488;
-        border-radius: 20px;
-        padding: 10px;
-        width: 40px;
-        font-size: 15px;
-    }
+body.dark {
+    background-color: var(--dark-bg-color); /* Cor de fundo no modo escuro */
+    color: var(--dark-text-color);
+}
 
-    body.light .drone-card {
-        background-color: var(--light-bg-color  );
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-        color: var(--light-text-color);
-    }
+main {
+    margin-left: 80px;
+    overflow-y: auto;  /* Permite a rolagem vertical */
+    height: 100vh; 
+    margin-right: 15px;
+    position: relative;
+    z-index: 1; 
+    margin-left: 100px;
+}
 
-    body.dark .drone-card {
-        background-color: var(--dark-bg-color);
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-        color: var(--dark-text-color);
-    }
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    top: 20px; /* Posição no topo */
+    width: 100%;
+}
 
-    #dronesContainer {
-        padding: 20px;
-    }
+body.dark .title-container h1 {
+    margin-right: 10px;
+    color: var(--dark-text-color);
+}
 
-    body.light .modal {
-        border: 4px solid transparent;
-        background: 
-        linear-gradient(var(--light-bg-color) 0 0) padding-box, /*this is your grey background*/
-        linear-gradient(to right, #c7d8e6, #51698c) border-box;
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px; /* Tamanho da caixa quadrada */
-        height: 400px; /* Tamanho da caixa quadrada */
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+body.light .title-container h1 {
+    margin-right: 10px;
+    color: var(--light-text-color);
+}
 
-    }
+.title-container button {
+    background-color: #4c6488;
+    border-radius: 20px;
+    padding: 10px;
+    width: 40px;
+    font-size: 15px;
+}
 
-    body.light .modal-content {
-        color: var(--light-text-color);
-        margin: 15% auto;
-        border-radius: 20px;
-        position: relative; /* Adiciona posição relativa para alinhar os elementos internos */
-        width: 100%; /* Ajusta a largura do modal */
-        align-items: center;
-        justify-content: center;
-    }
+body.light .drone-card {
+    background-color: var(--light-bg-color);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: var(--light-text-color);
+}
 
-    /* Estilos para o modal */
-    body.dark .modal {
-        border: 4px solid transparent;
-        background: 
-        linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
-        linear-gradient(to right, #c7d8e6, #51698c) border-box;
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px; /* Tamanho da caixa quadrada */
-        height: 400px; /* Tamanho da caixa quadrada */
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 0 20px 20px rgba(0, 0, 0, 0.5);
+body.dark .drone-card {
+    background-color: var(--dark-bg-color);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    color: var(--dark-text-color);
+}
 
-    }
+#dronesContainer {
+    padding: 20px;
+}
 
-    body.dark .modal-content {
-        color: var(--dark-text-color);
-        margin: 15% auto;
-        padding: 20px;
-        border-radius: 20px;
-        position: relative; /* Adiciona posição relativa para alinhar os elementos internos */
-        width: 80%; /* Ajusta a largura do modal */
-    }
+body.light .modal {
+    border: 4px solid transparent;
+    background: 
+    linear-gradient(var(--light-bg-color) 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Tamanho da caixa quadrada */
+    height: 400px; /* Tamanho da caixa quadrada */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.5);
+}
 
-    body.light .close {
-        position: absolute;
-        right: 10px;
-        font-size: 20px;
-        cursor: pointer;
-        font-size: 28px;
-        color: var(--light-text-color);
-    }
+body.light .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    color: var(--light-text-color);
+}
 
-    body.dark .close {
-        position: absolute;
-        right: 10px;
-        font-size: 20px;
-        cursor: pointer;
-        font-size: 28px;
-        color: var(--dark-text-color);
-    }
+/* Estilos para o modal */
+body.dark .modal {
+    border: 4px solid transparent;
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px; /* Tamanho da caixa quadrada */
+    height: 400px; /* Tamanho da caixa quadrada */
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.5);
+}
 
-    body.light .close:hover{
-        color:  #51698c;
-        text-decoration: none;
-        cursor: pointer;
-    }
+body.dark .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    color: var(--dark-text-color);
+}
 
-    body.dark .close:hover {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
+body.light .closeBtn {
+    top: 10px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 28px;
+    color: var(--light-text-color);
+}
 
-    .carousel {
-        display: flex;
-        overflow: hidden;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%; 
-    }
+body.dark .closeBtn {
+    top: 10px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 28px;
+    color: var(--dark-text-color);
+}
 
-    .carousel-item {
-        min-width: 100%;
-        transition: transform 0.5s ease;
-    }
+body.light .close:hover {
+    color: #51698c;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body.dark .close:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; 
+}
+
+.carousel-item {
+    min-width: 100%;
+    transition: transform 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+select {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 90%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    z-index: 1;
+    outline: none;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.select {
+    display: grid;
+    grid-template-areas: "select";
+    align-items: center;
+    position: relative;
+    min-width: 15ch;
+    max-width: 30ch;
+    border: 1px solid var(--select-border);
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: var(--input-bg-color-light);
+    color: var(--light-text-color);
+}
+
+.component-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.checkbox-list {
+    list-style-type: none; /* Remove a marcação padrão dos itens de lista */
+}
+
+.checkbox-list li {
+    display: flex; /* Usando flexbox para alinhar itens horizontalmente */
+    align-items: center; /* Alinhar itens verticalmente */
+    padding: 10px;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    background-color: #fff;
+    margin-right: 10px; /* Espaçamento entre a checkbox e o texto */
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+}
+
+/* Mudando a cor da marcação do checkbox quando estiver selecionado */
+input[type="checkbox"]:checked {
+    background-color: var(--input-bg-color-light); /* cor rosa */
+}
+
+label {
+    font-size: 16px; /* Tamanho da fonte do texto */
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    border: 1px solid transparent; /* Borda inicialmente transparente */
+    transition: border-color 0.3s ease; /* Transição suave para a cor da borda */
+}
+
+#droneName {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border: 4px solid transparent;
+    background:
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+}
+
+/* Estilo para inputs no modo escuro */
+body.dark #droneName {
+    background: 
+    linear-gradient(var(--input-bg-color-dark) 0 0) padding-box,
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color: var(--input-text-color-dark); /* Cor do texto */
+}
+
+body.dark #droneName::placeholder {
+    color: var(--dark-text-color); /* Cor do placeholder */
+}
+
+/* Estilo para inputs no modo claro */
+body.light #droneName {
+    background: 
+    linear-gradient(var(--light-bg-color) 0 0) padding-box,
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color: var(--input-text-color-light); /* Cor do texto */    
+}
+
+body.light #droneName::placeholder {
+    color: var(--input-text-color-light); /* Cor do placeholder */
+}
+
+#droneName:focus {
+    outline: none;
+    border: 4px solid transparent; /* Remover a borda ao focar */
+}
+
+.resume-btn, .addDroneBtn, .save-button, .finishBtn {
+    border: 4px solid transparent;
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    color: white; /* Definindo a cor do texto para branco como padrão */
+}
+
+body.dark .resume-btn,
+body.dark .addDroneBtn,
+body.dark .save-button,
+body.dark .finishBtn {
+    background: 
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box, /* Gradient background */
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color: var(--dark-text-color); /* Text color */
+}
+
+body.light .resume-btn,
+body.light .addDroneBtn,
+body.light .save-button,
+body.light .finishBtn {
+    background: 
+    linear-gradient(var(--light-bg-color) 0 0) padding-box, /* Gradient background */
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    color: var(--light-text-color); /* Definindo a cor do texto para preto no modo light */
+}
+
+.addDroneBtn:hover, .save-button:hover, .finishBtn:hover {
+    transform: scale(1.1);
+}
 
 
-    .resume-btn, .addDroneBtn, .save-button {
-        border: 4px solid transparent;
-        background: 
-        linear-gradient(var(--dark-bg-color) 0 0) padding-box, /*this is your grey background*/
-        linear-gradient(to right, #c7d8e6, #51698c) border-box;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-        color: white; /* Definindo a cor do texto para branco como padrão */
-    }
 
-    body.dark .resume-btn,
-    body.dark .addDroneBtn,
-    body.dark .save-button {
-        background: 
-        linear-gradient(var(--dark-bg-color) 0 0) padding-box, /* Gradient background */
-        linear-gradient(to right, #c7d8e6, #51698c) border-box;
-        color:var(--dark-text-color); / /* Text color */
-    }
+.prev, .next {
+    width: 50px;
+    height: 50px;
+    border: 4px solid transparent;
+    background:
+    linear-gradient(var(--light-bg-color) 0 0) padding-box,
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    border-radius: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    color: var(--light-text-color);
+}
 
-    body.light .resume-btn,
-    body.light .addDroneBtn,
-    body.light .save-button{
-        background: 
-        linear-gradient(var(--light-bg-color) 0 0) padding-box, /* Gradient background */
-        linear-gradient(to right, #c7d8e6, #51698c) border-box;
-        color:var(--light-text-color); /* Definindo a cor do texto para preto no modo light */
-    }
+.prev {
+    position: absolute;
+    left: -20%;
+    top: 192px;
+}
 
-    .addDroneBtn:hover.save-button:hover {
-        transform: scale(1.1);
-    }
+.next {
+    position: absolute;
+    right: -20%;
+    bottom: 150px;
+}
 
-    .prev, .next {
-        width: 50px;
-        height: 50px;
-        border: 4px solid transparent;
-        background: 
-        linear-gradient(var(--light-bg-color) 0 0) padding-box,
-        linear-gradient(to right, #c7d8e6, #51698c) border-box;
-        border-radius: 20px;
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-        top: 50%;
-        transform: translateY(-50%);
-    
-    }
+body.dark .prev, body.dark .next {
+    color: var(--dark-text-color);
+    background:linear-gradient(var(--dark-bg-color) 0 0) padding-box,
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+}
 
-    .prev, .next {
-        width: 50px;
-        height: 50px;
-        border: 4px solid transparent;
-        background:
-        linear-gradient(var(--light-bg-color) 0 0) padding-box,
-        linear-gradient(to right, #c7d8e6, #51698c) border-box;
-        border-radius: 20px;
-        color: white;
-        font-size: 20px;
-        cursor: pointer;
-        transform: translateY(-50%);
+/* Modal 2 */
+.modal2 {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Fundo semi-transparente */
+    align-items: center;
+    justify-content: center;
+}
 
-    }
+body.light .modal-content2 {
+    background-color: var(--light-bg-color);
+    margin: 5% auto;
+    padding: 20px;
+    border: 4px solid transparent;
+    background:
+    linear-gradient(var(--light-bg-color) 0 0) padding-box,
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+    color: var(--light-text-color);
+}
 
-    .prev {
-        position: absolute;
-        left: -20%;
-        top:192px;
-    }
+body.dark .modal-content2 {
+    background-color: var(--dark-bg-color);
+    margin: 5% auto;
+    padding: 20px;
+    border: 4px solid transparent;
+    background:
+    linear-gradient(var(--dark-bg-color) 0 0) padding-box,
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    border-radius: 20px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.1);
+    color: var(--dark-text-color);
+}
 
-    .next {
-        position: absolute;
-        right: -20%;
-        bottom:150px;
-    }
+.button {
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.body.dark .button {
+    background-color: var(--dark-bg-color);
+    color: var(--dark-text-color);
+    border: 2px solid var(--dark-text-color);
+}
+
+.body.light .button {
+    background-color: var(--light-bg-color);
+    color: var(--light-text-color);
+    border: 2px solid var(--light-text-color);
+}
+
+/* Styles for the save notification */
+.notification {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4caf50; /* Green */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1001; /* Make sure it is above other elements */
+}
+
+.notification.show {
+    display: block;
+}
+
+.confirm {
+    width: 40px;
+    height: 40PX;
+    border: 4px solid transparent;
+    background:
+    linear-gradient(var(--light-bg-color) 0 0) padding-box,
+    linear-gradient(to right, #c7d8e6, #51698c) border-box;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--light-text-color);
+}

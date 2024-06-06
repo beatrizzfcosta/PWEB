@@ -13,34 +13,40 @@ let unsavedChanges = false;
 function openModal() {
     document.getElementById('overlay').style.display = 'block'; // Mostra o overlay
     document.getElementById('droneModal').style.display = 'block';
+    
     loadComponents();
     updateModal();
     unsavedChanges = false;
 }
 
 function closeModal() {
-    if (unsavedChanges) {
-        document.getElementById('confirmCloseModal').style.display = 'block';
-    } else {
-        document.getElementById('overlay').style.display = 'none'; // Esconde o overlay
-        document.getElementById('droneModal').style.display = 'none';
-        updateDroneCard();
-    }
+    console.log('fechar');
+    document.getElementById('confirmCloseModal').style.display = 'block';
 }
 
-function confirmCloseModal() {
-    document.getElementById('confirmCloseModal').style.display = 'block';
+function confirmCloseModal(confirm) {
+    if (confirm) {
+        saveProgress();
+        document.getElementById('droneModal').style.display = 'none';
+        document.getElementById('confirmCloseModal').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none'; 
+        updateDroneCard();
+    } else {
+        closeModalWithoutSaving() 
+    }
 }
 
 function closeModalWithoutSaving() {
     document.getElementById('droneModal').style.display = 'none';
     document.getElementById('confirmCloseModal').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; 
     unsavedChanges = false;
 }
 
 function cancelClose() {
     document.getElementById('confirmCloseModal').style.display = 'none';
 }
+
 
 function nextStep() {
     if (currentStep < 3) {
@@ -123,6 +129,8 @@ function saveProgress() {
         }
     }
 
+    updateDroneCard(); // Atualiza ou adiciona o cartão do drone
+
     unsavedChanges = false;
     closeModal();
 }
@@ -158,7 +166,6 @@ function addDroneCard(drone) {
             style: {
                 color: '#3a3b3c',
                 position: 'absolute',
-               
                 right: '50px',
                 padding: 0,
                 margin: 0,
@@ -169,15 +176,19 @@ function addDroneCard(drone) {
         from: { color: '#FFEA82' },
         to: { color: '#ED6A5A' },
         step: (state, bar) => {
-            bar.setText(Math.round(bar.value() * 100) + ' %');
+            bar.setText(Math.round(bar.value() + ' %'));
         }
     });
 
     const progress = calculateProgress(drone);
     progressBar.animate(progress / 100); // Animate to the current progress
 
+    droneCard.appendChild(progressContainer); // Append progressContainer to droneCard
+    progressContainer.appendChild(progressBar.svg); // Append progress bar to progressContainer
+
     drone.progressBar = progressBar; // Save the progress bar instance to update later
 }
+
 
 function updateProgressBar() {
     if (droneData.id) {
@@ -185,7 +196,7 @@ function updateProgressBar() {
         if (droneCard) {
             const progress = calculateProgress(droneData);
             const progressBar = droneData.progressBar;
-            progressBar.animate(progress / 100); // Update the progress bar animation
+            progressBar.animate(progress); // Update the progress bar animation
         }
     }
 }
@@ -193,12 +204,21 @@ function updateProgressBar() {
 
 function calculateProgress(drone) {
     let completedSteps = 0;
-    if (drone.model) completedSteps++;
-    if (Object.keys(drone.components).length > 0) completedSteps++;
-    if (Object.keys(drone.tests).length > 0) completedSteps++;
-    if (drone.name && drone.difficulty) completedSteps++;
-    return (completedSteps / 4) * 100;
+    if (drone.model) completedSteps += 25; // Modelo
+    if (Object.keys(drone.components).length > 0) completedSteps += 25; // Componentes
+    if (Object.keys(drone.tests).length > 0) completedSteps += 25; // Testes
+    if (drone.name && drone.difficulty) completedSteps += 25; // Nome e dificuldade
+    return completedSteps; // Retorna o progresso total
 }
+
+function calculateCurrentStep(drone) {
+    if (!drone.model) return 0;
+    if (!drone.name || !drone.difficulty) return 3;
+    if (Object.keys(drone.tests).length === 0) return 2;
+    if (Object.keys(drone.components).length === 0) return 1;
+    return 4;  // All steps completed
+}
+
 
 function resumeAssembly(id) {
     droneData = drones.find(drone => drone.id === id);
@@ -218,8 +238,8 @@ function updateDroneCard() {
     const droneCard = document.querySelector(`.drone-card[data-id='${droneData.id}']`);
     if (droneCard) {
         const progress = calculateProgress(droneData);
-        const progressBar = droneCard.progressBar;
-        progressBar.animate(progress / 100);  // Update the progress bar animation
+        const progressBar = droneData.progressBar;
+        progressBar.animate(progress);  // Update the progress bar animation
     } else {
         addDroneCard(droneData);
     }
@@ -254,6 +274,7 @@ function updateModal() {
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addDroneBtn').addEventListener('click', () => {
+        // Reset droneData to default values
         droneData = {
             model: '',
             components: {},
@@ -263,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         currentStep = 0;
         openModal();
+        updateModal(); // Update the modal to reflect the reset droneData
     });
 
     window.onclick = function(event) {
@@ -272,3 +294,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 });
+
