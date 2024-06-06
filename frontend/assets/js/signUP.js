@@ -12,50 +12,56 @@ function togglePasswordVisibility(inputId, icon) {
 }
 
 document.querySelector('form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the default form submission
+  event.preventDefault(); // Prevent the default form submission
 
-    const firstName = document.getElementById('first-name').value;
-    const lastName = document.getElementById('last-name').value;
-    const username = document.getElementById('username').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('password-confirmation').value;
-    const msgError = document.getElementById('msgError').value;
-    const msgSuccess = document.getElementById('msgError').value;
+  const firstName = document.getElementById('first-name').value;
+  const lastName = document.getElementById('last-name').value;
+  const username = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('password-confirmation').value;
+  const msgError = document.getElementById('msgError');
+  const msgSuccess = document.getElementById('msgSuccess');
 
-    if (password !== confirmPassword) {
-      msgError.innerText = 'Passwords do not match';
-      return;
-    }
-  
-    const user = {
-      firstName,
-      lastName,
-      username,
-      email,
-      password
-    };
-  
-    fetch('http://localhost:15000/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.status === 'pending') {
-        msgSuccess.innerText = 'Registration successful! Please verify your email.';
-        msgError.innerText = '';
-      } else {
-        msgError.innerText = data.message;
-        msgSuccess.innerText = '';
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      msgError.innerText = 'An error occurred during registration';
+  // Check if at least one field is filled
+  if (!firstName && !lastName && !username && !email && !password && !confirmPassword) {
+    msgError.innerText = 'Please fill at least one field';
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    msgError.innerText = 'Passwords do not match';
+    return;
+  }
+
+  const user = {
+    firstName,
+    lastName,
+    username,
+    email,
+    password
+  };
+
+  fetch('http://localhost:15000/user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.status === 'pending') {
+      msgSuccess.innerText = 'Registration successful! Please verify your email.';
+      msgError.innerText = '';
+    } else {
+      msgError.innerText = data.message;
       msgSuccess.innerText = '';
-    });
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    msgError.innerText = 'An error occurred during registration';
+    msgSuccess.innerText = '';
   });
+});
