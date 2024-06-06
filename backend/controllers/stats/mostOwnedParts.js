@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   try {
     const mostStokedParts = await Part.find()
       .sort({ quantity: -1 })
-      .limit(10)
+      .limit(5)
       .exec();
 
     if (mostStokedParts) {

@@ -44,14 +44,13 @@ async function fetchUser() {
         const firstNameElement = document.getElementById("firstName");
         const lastNameElement = document.getElementById("lastName");
         const emailElement = document.getElementById("email");
-        const dronesMadeElement = document.getElementById("dronesMade");
-
+        const profileImage = document.querySelector('.profile-picture');
 
         usernameElement.textContent = user.username;
         firstNameElement.textContent = user.firstName;
         lastNameElement.textContent = user.lastName;
         emailElement.textContent = user.email;
-        dronesMadeElement.textContent = "10";
+        profileImage.src = "../../backend/database/uploads/" + user.image;
 
 }
 
@@ -68,7 +67,7 @@ function editProfilePicture() {
         if (file && file.type.startsWith('image/')) {
             // Cria um objeto URL para a imagem selecionada
             const imageURL = URL.createObjectURL(file);
-
+            console.log(imageURL)
             // Seleciona a imagem de perfil e atualiza o src
             const profileImage = document.querySelector('.profile-picture');
             profileImage.src = imageURL;
@@ -87,17 +86,46 @@ function editProfilePicture() {
     input.click();
 }
 
+document.getElementById('profile-image-upload').onchange = function() {
+    profilePictureChanged = true;
+};
+async function saveProfilePicture() {
+    const profilePictureInput = document.getElementById('profile-image-upload');
 
-function saveProfilePicture() {
-    if (profilePictureChanged) {
-        // lógica para salvar a foto de perfil no servidor
-        // Exemplo de mensagem de sucesso
-        profilePictureChanged = false;
-        alert('Foto de perfil salva com sucesso!');
-        editButton.onclick = editProfilePicture;
-    } else {
-        // Exibe uma mensagem informando ao usuário que nenhuma foto foi alterada
-        alert('Nenhuma alteração na foto de perfil para salvar.');
+    if (profilePictureInput.files.length === 0) {
+        alert('Please select a profile picture to upload.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', profilePictureInput.files[0]);
+    console.log(formData)
+    try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            throw new Error('Token not found in local storage');
+        }
+
+        const response = await fetch('http://localhost:15000/user/image', {
+            method: 'PATCH',
+            headers: {
+                'Authorization': token
+
+            },
+            body: formData
+        });
+
+        const result = await response.json();
+        console.log(result.data);
+        if (response.ok) {
+            alert('Profile picture saved successfully!');
+            document.getElementById('profile-picture').src = result.user.image;
+        } else {
+            alert('Error: ' + result.error);
+        }
+    } catch (error) {
+        alert('An error occurred: ' + error.message);
     }
 }
 

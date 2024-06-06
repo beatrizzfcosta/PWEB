@@ -7,9 +7,9 @@ const patchProjRoutes = require("./routes/patch");
 const getProjRoutes = require("./routes/get");
 const auth = require("../../middlewares/auth")
 
-//router.use("/", auth, postProjRoutes);
-//router.use("/", auth, deleteProjRoutes);
-//router.use("/", auth, patchProjRoutes);
-//router.use("/", auth, getProjRoutes);
+router.use("/", auth, postProjRoutes);
+router.use("/", auth, deleteProjRoutes);
+router.use("/", auth, patchProjRoutes);
+router.use("/", auth, getProjRoutes);
 
 module.exports = router;

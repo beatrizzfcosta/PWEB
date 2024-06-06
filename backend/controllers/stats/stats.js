@@ -7,9 +7,9 @@ const mostOwnedParts = require("./mostOwnedParts");
 const projectsDoneByMonth = require("./projectsDoneByMonth");
 const auth = require("../../middlewares/auth");
 
-router.use("/", auth, activeProjects);
-router.use("/", auth, mostBuiltDrone);
-router.use("/", auth, mostOwnedParts);
-router.use("/", auth, projectsDoneByMonth);
+router.use("/activeProjects", auth, activeProjects);
+router.use("/mostBuiltDrone", auth, mostBuiltDrone);
+router.use("/mostOwnedParts", auth, mostOwnedParts);
+router.use("/projectsDoneByMonth", auth, projectsDoneByMonth);
 
 module.exports = router;

@@ -66,6 +66,7 @@ router.post("/", (req, res) => {
                 username,
                 email,
                 password: hashedPassword,
+                image:'profile.png',
                 verification: false
             }).then((result) => {
                 sendVerificationEmail(result,res);

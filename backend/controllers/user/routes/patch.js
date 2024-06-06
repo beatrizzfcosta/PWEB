@@ -1,9 +1,8 @@
-//patch part
-
 const express = require("express");
 const router = express.Router();
 const User = require("../../../models/user/user");
-const {extractUserIdFromToken} = require("../../../database/dbFunctions/dbF");
+const { extractUserIdFromToken } = require("../../../database/dbFunctions/dbF");
+const upload = require("../../../database/dbFunctions/dbImages"); // Adjust path if necessary
 
 router.patch("/", async (req, res) => {
   try {
@@ -16,7 +15,6 @@ router.patch("/", async (req, res) => {
         message: "Can't find all necessary information"
       });
     }
-
 
     const existingUser = await User.findOne({
       $and: [
@@ -32,7 +30,6 @@ router.patch("/", async (req, res) => {
       });
     }
 
-    // Update user information
     const updatedUser = await User.findOneAndUpdate(
         { username: userUsername },
         { $set: { username, firstName, lastName, email } },
@@ -60,4 +57,36 @@ router.patch("/", async (req, res) => {
     });
   }
 });
+
+router.patch('/image', upload.single('image'), async (req, res) => {
+  try {
+    const userUsername = extractUserIdFromToken(req.headers.authorization);
+    const imageFile = req.file;
+
+    if (!imageFile) {
+      return res.status(400).json({ error: 'Image file is required' });
+    }
+
+    const imagePath = `${imageFile.filename}`;
+
+    const user = await User.findOneAndUpdate(
+        { username: userUsername },
+        { image: imagePath },
+        { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      message: 'User image updated successfully',
+      data: user
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 module.exports = router;

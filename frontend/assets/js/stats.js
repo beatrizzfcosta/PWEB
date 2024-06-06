@@ -1,15 +1,33 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const charts = [];
+document.addEventListener('DOMContentLoaded', async function () {
+    const charts=[]
+    const token = localStorage.getItem('token');
 
-    const chartPecasUsadas = () => {
+    if (!token) {
+        throw new Error('Token not found in local storage');
+    }
+
+    const chartPecasUsadas = async () => {
+        const response = await fetch('http://localhost:15000/stat/mostOwnedParts', {
+            method: 'GET',
+            headers: {
+                'Authorization': token,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch components');
+        }
+
+        const data = await response.json();
         const ctx = document.getElementById('chartPecasUsadassId').getContext('2d');
         return new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Motor', 'Hélice', 'Bateria', 'Controle', 'Câmera'],
+                labels: [data[0].name, data[1].name, data[2].name, data[3].name, data[4].name],
                 datasets: [{
                     label: 'Peças Mais Usadas',
-                    data: [50, 40, 45, 35, 25],
+                    data: [data[0].quantity, data[1].quantity, data[2].quantity, data[3].quantity, data[4].quantity],
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
@@ -25,6 +43,49 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
 
+
+    const chartLineExample = async () => {
+        try {
+            const response = await fetch('http://localhost:15000/stat/mostBuiltDrone', {
+                method: 'GET',
+                headers: {
+                    'Authorization': token,
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch components');
+            }
+
+            const data = await response.json();
+            console.log(data)
+            const ctx = document.getElementById('lineChartExample').getContext('2d');
+            return new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [data[0].model, data[1].model, data[2].model, data[3].model, data[4].model],
+                    datasets: [{
+                        label: 'Example Line Data',
+                        data: [data[0].quantity, data[1].quantity, data[2].quantity, data[3].quantity, data[4].quantity],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error in chartLineExample:', error);
+        }
+    };
     const chartModelosEficientes = () => {
         return new Chart(document.getElementById('chartModelosEficientes').getContext('2d'), {
             type: 'radar',
@@ -115,18 +176,20 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     const createChart = (index) => {
-        switch(index) {
+        switch (index) {
             case 0:
                 return chartPecasUsadas();
             case 1:
-                return chartModelosEficientes();
+                return chartLineExample();
             case 2:
                 return chartTempoMedio();
+
+
         }
     };
     // Inicializar o primeiro gráfico
     charts.push(chartPecasUsadas());
-    charts.push(chartModelosEficientes());
+    charts.push(chartLineExample());
     charts.push(chartTempoMedio());
     charts.push(chartPecasUsadas());
 });
