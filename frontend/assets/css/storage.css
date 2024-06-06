@@ -344,7 +344,7 @@ body.light  #addComponentModal input[type="text"],
 body.light #addComponentModal input[type="number"],
 body.light #addComponentModal textarea  {
     background:
-        linear-gradient(var(--input-bg-color-light) 0 0) padding-box,
+        linear-gradient(var(--light-bg-color) 0 0) padding-box,
         linear-gradient(to right, #c7d8e6, #51698c) border-box;
 
     color:var(--light-text-color)
