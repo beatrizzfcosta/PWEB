@@ -148,7 +148,10 @@ function addDroneCard(drone) {
     droneCard.innerHTML = `
         <h3>${drone.model}</h3>
         <div id="progressContainer-${drone.id}" class="progress-bar-container"></div>
-        <button class="resume-btn" onclick="resumeAssembly(${drone.id})">Resume</button>
+        <div class="button-container">
+            <button class="resume-btn" onclick="resumeAssembly(${drone.id})">Resume</button>
+            <button class="delete-btn" onclick="deleteDroneCard(${drone.id})">Delete</button>
+        </div>
     `;
 
     dronesContainer.appendChild(droneCard);
@@ -295,3 +298,25 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
+
+let droneToDeleteId;
+
+function deleteDroneCard(id) {
+    droneToDeleteId = id;
+    document.getElementById('confirmDeleteCard').style.display = 'block';
+}
+
+function confirmDeleteCard(confirm) {
+    if (confirm) {
+        drones = drones.filter(drone => drone.id !== droneToDeleteId); // Remove o drone da lista
+        const droneCard = document.querySelector(`.drone-card[data-id='${droneToDeleteId}']`);
+        if (droneCard) {
+            droneCard.remove(); // Remove o cartão do drone do DOM
+        }
+    }
+    closeModalDeleteCard();
+}
+
+function closeModalDeleteCard() {
+    document.getElementById('confirmDeleteCard').style.display = 'none';
+}
